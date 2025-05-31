@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Apo.IA
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: apo_ia
