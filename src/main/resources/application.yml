@@ -5,3 +5,6 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017
       database: apo_ia
+
+jwt:
+  secret: ${JWT_SECRET:OhanaQuerDizerFamiliaFamiliaQuerDizerNuncaAbandonarOuEsquecer}

@@ -9,7 +9,7 @@ import java.util.List;
 public class UsuarioMapper {
     public static Usuario toEntityCreate(UsuarioCreateRequestDto usuarioCreateRequestDto) {
         return Usuario.builder()
-                .nome(usuarioCreateRequestDto.getName())
+                .nome(usuarioCreateRequestDto.getNome())
                 .email(usuarioCreateRequestDto.getEmail())
                 .build();
     }

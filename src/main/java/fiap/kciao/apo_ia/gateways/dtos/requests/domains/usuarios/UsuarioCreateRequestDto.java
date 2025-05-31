@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 public class UsuarioCreateRequestDto {
     @NotEmpty
-    private String name;
+    private String nome;
     @NotEmpty
     private String email;
     @NotEmpty

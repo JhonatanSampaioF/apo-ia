@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,11 +25,21 @@ public class UsuarioQueryService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
     }
 
+    public Usuario findByEmailOrThrow(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+    }
+
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
 
     public void deleteById(String id) {
         usuarioRepository.deleteById(id);
+    }
+
+    public Usuario findByEmailOrNull(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElse(null);
     }
 }

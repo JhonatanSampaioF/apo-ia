@@ -4,7 +4,6 @@ import fiap.kciao.apo_ia.domains.Usuario;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.usuarios.UsuarioCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.usuarios.UsuarioUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.usuarios.UsuarioFullResponseDto;
-import fiap.kciao.apo_ia.gateways.mappers.domains.UsuarioMapper;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudUsuario;
 import fiap.kciao.apo_ia.usecases.services.query.UsuarioQueryService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class CrudUsuarioImpl implements CrudUsuario {
     public UsuarioFullResponseDto update(String id, UsuarioUpdateRequestDto usuarioUpdateRequestDto) {
         Usuario usuario = usuarioQueryService.findByIdOrThrow(id);
 
-        usuario.setNome(usuarioUpdateRequestDto.getName());
+        usuario.setNome(usuarioUpdateRequestDto.getNome());
         usuario.setEmail(usuarioUpdateRequestDto.getEmail());
         usuario.setSenha(usuarioUpdateRequestDto.getSenha());
 

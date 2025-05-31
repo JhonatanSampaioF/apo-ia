@@ -10,7 +10,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO adicionar controller
 	// TODO adicionar login
 	// TODO adicionar autenticação
 	// TODO adicionar spring AI
