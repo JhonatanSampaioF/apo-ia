@@ -31,4 +31,9 @@ public class VoluntarioQueryService {
     public void deleteById(String id) {
         voluntarioRepository.deleteById(id);
     }
+
+    public Voluntario findByAbrigadoIdOrElseNull(String id) {
+        return voluntarioRepository.findByAbrigadoId(id)
+                .orElse(null);
+    }
 }

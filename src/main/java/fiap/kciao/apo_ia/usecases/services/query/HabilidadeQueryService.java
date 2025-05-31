@@ -31,4 +31,9 @@ public class HabilidadeQueryService {
     public void deleteById(String id) {
         habilidadeRepository.deleteById(id);
     }
+
+    public Habilidade findByIdOrElseNull(String id) {
+        return habilidadeRepository.findById(id)
+                .orElse(null);
+    }
 }

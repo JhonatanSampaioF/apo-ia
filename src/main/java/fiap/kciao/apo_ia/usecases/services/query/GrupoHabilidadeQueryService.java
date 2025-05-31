@@ -30,4 +30,9 @@ public class GrupoHabilidadeQueryService {
     public void deleteById(String id) {
         grupoHabilidadeRepository.deleteById(id);
     }
+
+    public GrupoHabilidade findByIdOrElseNull(String id) {
+        return grupoHabilidadeRepository.findById(id)
+                .orElse(null);
+    }
 }

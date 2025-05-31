@@ -24,6 +24,11 @@ public class DoencaQueryService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Doença não encontrada"));
     }
 
+    public Doenca findByIdOrNull(String id) {
+        return doencaRepository.findById(id)
+                .orElse(null);
+    }
+
     public List<Doenca> findAll() {
         return doencaRepository.findAll();
     }

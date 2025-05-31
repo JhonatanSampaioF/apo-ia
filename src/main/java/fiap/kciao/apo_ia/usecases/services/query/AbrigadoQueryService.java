@@ -27,6 +27,10 @@ public class AbrigadoQueryService {
         return abrigadoRepository.findAll();
     }
 
+    public List<Abrigado> findAllByLocalId(String id) {
+        return abrigadoRepository.findAllByLocalId(id);
+    }
+
     public void deleteById(String id) {
         abrigadoRepository.deleteById(id);
     }

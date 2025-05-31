@@ -10,8 +10,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO adicionar login
-	// TODO adicionar autenticação
 	// TODO adicionar spring AI
 	// TODO rabbitMQ
 	// TODO testes unitários
