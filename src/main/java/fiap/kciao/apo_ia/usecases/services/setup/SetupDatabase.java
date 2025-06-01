@@ -52,7 +52,7 @@ public class SetupDatabase {
                     .nome("Centro de Apoio Central")
                     .endereco("Rua da Solidariedade, 123")
                     .capacidade(100)
-                    .qtd_abrigados(0)
+                    .qtd_abrigados(88)
                     .build();
             localQueryService.save(local);
             log.info("Local criado.");
