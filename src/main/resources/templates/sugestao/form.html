@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sugestão IA</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="list-container">
+    <h1>Obter sugestão da IA</h1>
+
+    <form th:action="@{/mvc/sugestao-ia}" method="post" class="form-group">
+        <label for="pergunta">Digite sua pergunta:</label>
+        <input type="text" id="pergunta" name="pergunta" required
+               placeholder="Ex: Quais voluntários posso alocar para a cozinha?"
+               th:value="${pergunta}">
+        <button type="submit" class="add-button" style="margin-top: 1rem;">Enviar</button>
+    </form>
+
+    <div th:if="${resposta}" style="margin-top: 2rem;">
+        <h2>Resposta da IA:</h2>
+        <p th:utext="${resposta}"></p>
+    </div>
+</main>
+
+</body>
+</html>
