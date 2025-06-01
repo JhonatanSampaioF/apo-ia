@@ -7,40 +7,35 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<header class="main-header">
-    <div class="header-top">
-        <a th:href="@{/mvc/local/create}" class="create-button">➕ Novo Local</a>
-        <h1>Lista de Locais</h1>
-    </div>
-</header>
-
 <main>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Endereço</th>
-            <th>Capacidade</th>
-            <th>Qtd. Abrigados</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="local : ${locais}">
-            <td th:text="${local.id}">ID</td>
-            <td th:text="${local.nome}">Nome</td>
-            <td th:text="${local.endereco}">Endereço</td>
-            <td th:text="${local.capacidade}">Capacidade</td>
-            <td th:text="${local.qtd_abrigados}">Abrigados</td>
-            <td>
-                <a th:href="@{/mvc/local/detail/{id}(id=${local.id})}">🔍</a>
-                <a th:href="@{/mvc/local/edit/{id}(id=${local.id})}">✏️</a>
-                <a th:href="@{/mvc/local/delete/{id}(id=${local.id})}">🗑️</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="list-container">
+        <h2>Lista de Habilidades</h2>
+        <a th:href="@{/mvc/local/form}" class="add-button">+ Novo Local</a>
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Capacidade</th>
+                <th>Qtd. Abrigados</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="local : ${locais}">
+                <td th:text="${local.nome}">Nome</td>
+                <td th:text="${local.endereco}">Endereço</td>
+                <td th:text="${local.capacidade}">Capacidade</td>
+                <td th:text="${local.qtd_abrigados}">Abrigados</td>
+                <td>
+                    <a th:href="@{/mvc/local/edit/{id}(id=${local.id})}" class="action">✏️</a>
+                    <a th:href="@{/mvc/local/delete/{id}(id=${local.id})}" class="action danger" onclick="return confirm('Deseja realmente deletar este grupo?')">🗑️</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 </html>

@@ -71,8 +71,6 @@ public class AbrigadoControllerMvc {
         return "domains/abrigados/form";
     }
 
-
-
     @PostMapping
     public String create(@ModelAttribute("abrigado") @Valid AbrigadoCreateRequestDto dto) {
         crudAbrigado.create(dto);

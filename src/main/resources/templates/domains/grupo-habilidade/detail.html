@@ -3,12 +3,23 @@
 <head>
     <title>Detalhes do Grupo de Habilidade</title>
     <link rel="stylesheet" th:href="@{/css/global.css}">
+    <style>
+        .detail-group ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .detail-group {
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
+<div th:replace="~{fragments/header :: header}"></div>
 
-<header class="main-header">
-    <div class="header-top">
+<header class="header-detalhe">
+    <div class="header-content">
         <a th:href="@{/mvc/grupo-habilidade}" class="home-button">🔙</a>
         <h1>Detalhes do Grupo de Habilidade</h1>
     </div>
@@ -17,12 +28,16 @@
 <main>
     <section class="detail-section">
         <div class="detail-group">
-            <label>ID:</label>
-            <span th:text="${grupo.id}">ID</span>
-        </div>
-        <div class="detail-group">
-            <label>Nome:</label>
+            <label><strong>Nome:</strong></label>
             <span th:text="${grupo.nome}">Nome</span>
+        </div>
+
+        <div class="detail-group">
+            <label><strong>Habilidades Associadas:</strong></label>
+            <ul>
+                <li th:each="habilidade : ${habilidades}"
+                    th:text="${habilidade.nome}">Habilidade</li>
+            </ul>
         </div>
     </section>
 </main>

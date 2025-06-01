@@ -12,4 +12,5 @@ public class HabilidadeFullResponseDto {
     private String nome;
     private Integer prioridade;
     private String grupoHabilidadeId;
+    private String grupoHabilidadeNome;
 }

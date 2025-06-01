@@ -28,10 +28,14 @@ public class CrudLocalImpl implements CrudLocal {
     public LocalFullResponseDto update(String id, LocalUpdateRequestDto localUpdateRequestDto) {
         Local local = localQueryService.findByIdOrThrow(id);
 
-        local.setNome(localUpdateRequestDto.getNome());
-        local.setEndereco(localUpdateRequestDto.getEndereco());
-        local.setCapacidade(localUpdateRequestDto.getCapacidade());
-        local.setQtd_abrigados(localUpdateRequestDto.getQtd_abrigados());
+        local.setNome(localUpdateRequestDto.getNome() != null
+                ? localUpdateRequestDto.getNome() : local.getNome());
+        local.setEndereco(localUpdateRequestDto.getEndereco() != null
+                ? localUpdateRequestDto.getEndereco() : local.getEndereco());
+        local.setCapacidade(localUpdateRequestDto.getCapacidade() != null
+                ? localUpdateRequestDto.getCapacidade() : local.getCapacidade());
+        local.setQtd_abrigados(localUpdateRequestDto.getQtd_abrigados() != null
+                ? localUpdateRequestDto.getQtd_abrigados() : local.getQtd_abrigados());
 
         return toFullResponseDto(localQueryService.save(local));
     }

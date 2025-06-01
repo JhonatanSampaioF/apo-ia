@@ -10,29 +10,33 @@
 <header class="main-header">
     <div class="header-top">
         <a th:href="@{/mvc/habilidade}" class="home-button">🔙</a>
-        <h1>Cadastrar Nova Habilidade</h1>
+        <h1 th:text="${id} != null ? 'Editar Habilidade' : 'Nova Habilidade'"></h1>
     </div>
 </header>
 
 <main>
-    <form th:action="@{/mvc/habilidade/create}" method="post">
-        <div>
+    <form th:action="${id} != null ? @{/mvc/habilidade/edit/{id}(id=${id})} : @{/mvc/habilidade}" th:object="${habilidade}" method="post">
+        <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
+            <input type="text" id="nome" th:field="*{nome}" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="prioridade">Prioridade:</label>
-            <input type="number" id="prioridade" name="prioridade" required>
+            <input type="number" id="prioridade" th:field="*{prioridade}" required>
         </div>
 
-        <div>
+        <div class="form-group" th:if="${id == null}">
             <label for="grupoHabilidadeId">Grupo de Habilidade:</label>
-            <select id="grupoHabilidadeId" name="grupoHabilidadeId" required>
-                <option value="" disabled selected>Selecione</option>
-                <option th:each="grupo : ${grupos}" th:value="${grupo.id}" th:text="${grupo.nome}"></option>
+            <select id="grupoHabilidadeId" th:field="*{grupoHabilidadeId}" required>
+                <option value="" disabled>Selecione</option>
+                <option th:each="grupo : ${grupos}"
+                        th:value="${grupo.id}"
+                        th:text="${grupo.nome}">
+                </option>
             </select>
         </div>
+
 
         <button type="submit">Salvar</button>
     </form>

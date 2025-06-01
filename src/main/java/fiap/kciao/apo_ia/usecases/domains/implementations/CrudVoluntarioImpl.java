@@ -48,7 +48,8 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
     public VoluntarioFullResponseDto update(String id, VoluntarioUpdateRequestDto voluntarioUpdateRequestDto) {
         Voluntario voluntario = voluntarioQueryService.findByIdOrThrow(id);
 
-        voluntario.setCapacidade_motora(voluntarioUpdateRequestDto.getCapacidade_motora());
+        voluntario.setCapacidade_motora(voluntarioUpdateRequestDto.getCapacidade_motora() != null
+                ? voluntarioUpdateRequestDto.getCapacidade_motora() : voluntario.getCapacidade_motora());
 
         if (voluntarioUpdateRequestDto.getHabilidadeIds() != null && !voluntarioUpdateRequestDto.getHabilidadeIds().isEmpty()) {
             voluntario.setHabilidadeIds(new ArrayList<>());
@@ -73,6 +74,10 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
 
     @Override
     public void delete(String id) {
+        Voluntario voluntario = voluntarioQueryService.findByIdOrThrow(id);
+        Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(voluntario.getAbrigadoId());
+        abrigado.setVoluntario(false);
+        abrigadoQueryService.save(abrigado);
         voluntarioQueryService.deleteById(id);
     }
 
@@ -99,5 +104,10 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
         }
 
         return toFullResponseDto(voluntarioQueryService.save(voluntario));
+    }
+
+    @Override
+    public VoluntarioFullResponseDto findByAbrigadoId(String id) {
+        return toFullResponseDto(voluntarioQueryService.findByAbrigadoIdOrElseNull(id));
     }
 }

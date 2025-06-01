@@ -10,12 +10,8 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO mvc doença
-	// TODO mvc local
-	// TODO mvc grupos de habilidade
-	// TODO mvc habilidade
-	// TODO mvc abrigados
-	// TODO mvc voluntarios
+	// TODO teste IA
+	// TODO mvc ia
 	// TODO criar vídeo demonstração da solução completa 10min
 	// TODO criar vídeo pitch 3min
 	// TODO incluir link do deploy

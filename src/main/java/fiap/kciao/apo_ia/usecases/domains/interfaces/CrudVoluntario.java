@@ -15,4 +15,5 @@ public interface CrudVoluntario {
     public void delete(String id);
     public VoluntarioFullResponseDto manageHabilidade(String voluntarioId, String habilidadeId, ManageAction action);
     public VoluntarioFullResponseDto manageAlocacao(String voluntarioId, String alocacao, ManageAction action);
+    VoluntarioFullResponseDto findByAbrigadoId(String id);
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AbrigadoRepository extends MongoRepository<Abrigado, String> {
     List<Abrigado> findAllByLocalId(String localId);
+    List<Abrigado> findAllByDoencaIdsContaining(String id);
 }

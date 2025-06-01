@@ -23,7 +23,7 @@ public class UsuarioControllerMvc {
         return "domains/usuarios/list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/form")
     public String showForm(Model model) {
         model.addAttribute("usuario", new UsuarioCreateRequestDto());
         return "domains/usuarios/form";
@@ -52,7 +52,7 @@ public class UsuarioControllerMvc {
         return "redirect:/mvc/usuario";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id) {
         crudUsuario.delete(id);
         return "redirect:/mvc/usuario";

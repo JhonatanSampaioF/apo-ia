@@ -1,7 +1,9 @@
 package fiap.kciao.apo_ia.gateways.controllers.mvc.domains;
 
+import fiap.kciao.apo_ia.domains.Habilidade;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.habilidades.HabilidadeCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.habilidades.HabilidadeUpdateRequestDto;
+import fiap.kciao.apo_ia.gateways.dtos.responses.domains.gruposHabilidades.GrupoHabilidadeFullResponseDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.habilidades.HabilidadeFullResponseDto;
 import fiap.kciao.apo_ia.usecases.domains.implementations.CrudGrupoHabilidadeImpl;
 import fiap.kciao.apo_ia.usecases.domains.implementations.CrudHabilidadeImpl;
@@ -10,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/mvc/habilidade")
@@ -21,11 +25,17 @@ public class HabilidadeControllerMvc {
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("habilidades", crudHabilidade.findAll());
+        List<HabilidadeFullResponseDto> habilidades = crudHabilidade.findAll();
+        for (HabilidadeFullResponseDto habilidade : habilidades) {
+            GrupoHabilidadeFullResponseDto grupoHabilidade = crudGrupoHabilidade.findById(habilidade.getGrupoHabilidadeId());
+            habilidade.setGrupoHabilidadeNome(grupoHabilidade.getNome());
+        }
+        model.addAttribute("habilidades", habilidades);
+
         return "domains/habilidades/list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/form")
     public String showForm(Model model) {
         model.addAttribute("habilidade", new HabilidadeCreateRequestDto());
         model.addAttribute("grupos", crudGrupoHabilidade.findAll());
@@ -46,7 +56,6 @@ public class HabilidadeControllerMvc {
                 .nome(habilidade.getNome())
                 .prioridade(habilidade.getPrioridade())
                 .build());
-        model.addAttribute("grupos", crudGrupoHabilidade.findAll());
         return "domains/habilidades/form";
     }
 
@@ -56,7 +65,7 @@ public class HabilidadeControllerMvc {
         return "redirect:/mvc/habilidade";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id) {
         crudHabilidade.delete(id);
         return "redirect:/mvc/habilidade";

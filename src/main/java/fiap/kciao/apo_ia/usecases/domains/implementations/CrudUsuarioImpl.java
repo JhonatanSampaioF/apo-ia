@@ -7,6 +7,7 @@ import fiap.kciao.apo_ia.gateways.dtos.responses.domains.usuarios.UsuarioFullRes
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudUsuario;
 import fiap.kciao.apo_ia.usecases.services.query.UsuarioQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,19 +18,30 @@ import static fiap.kciao.apo_ia.gateways.mappers.domains.UsuarioMapper.*;
 @RequiredArgsConstructor
 public class CrudUsuarioImpl implements CrudUsuario {
     private final UsuarioQueryService usuarioQueryService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UsuarioFullResponseDto create(UsuarioCreateRequestDto usuarioCreateRequestDto) {
-        return toFullResponseDto(usuarioQueryService.save(toEntityCreate(usuarioCreateRequestDto)));
+        Usuario usuario = usuarioQueryService.findByEmailOrThrow(usuarioCreateRequestDto.getEmail());
+        if (usuario != null) {
+            throw new IllegalArgumentException("Email já utilizado");
+        }
+        usuario = toEntityCreate(usuarioCreateRequestDto);
+        usuario.setSenha(passwordEncoder.encode(usuarioCreateRequestDto.getSenha()));
+
+        return toFullResponseDto(usuarioQueryService.save(usuario));
     }
 
     @Override
     public UsuarioFullResponseDto update(String id, UsuarioUpdateRequestDto usuarioUpdateRequestDto) {
         Usuario usuario = usuarioQueryService.findByIdOrThrow(id);
 
-        usuario.setNome(usuarioUpdateRequestDto.getNome());
-        usuario.setEmail(usuarioUpdateRequestDto.getEmail());
-        usuario.setSenha(usuarioUpdateRequestDto.getSenha());
+        usuario.setNome(usuarioUpdateRequestDto.getNome() != null
+                ? usuarioUpdateRequestDto.getNome() : usuario.getNome());
+        usuario.setEmail(usuarioUpdateRequestDto.getEmail() != null
+                ? usuarioUpdateRequestDto.getEmail() : usuario.getEmail());
+        usuario.setSenha(usuarioUpdateRequestDto.getSenha() != null
+                ? passwordEncoder.encode(usuarioUpdateRequestDto.getSenha()) : usuario.getSenha());
 
         return toFullResponseDto(usuarioQueryService.save(usuario));
     }

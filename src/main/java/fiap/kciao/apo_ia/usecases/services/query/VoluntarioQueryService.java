@@ -36,4 +36,12 @@ public class VoluntarioQueryService {
         return voluntarioRepository.findByAbrigadoId(id)
                 .orElse(null);
     }
+
+    public List<Voluntario> findAllByHabilidadeId(String id) {
+        return voluntarioRepository.findAllByHabilidadeIdsContaining(id);
+    }
+
+    public void saveAll(List<Voluntario> voluntarios) {
+        voluntarioRepository.saveAll(voluntarios);
+    }
 }

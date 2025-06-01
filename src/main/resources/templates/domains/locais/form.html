@@ -15,29 +15,30 @@
 </header>
 
 <main>
-    <form th:action="@{/mvc/local/create}" method="post">
+    <form th:action="${id} != null ? @{/mvc/local/edit/{id}(id=${id})} : @{/mvc/local}" th:object="${local}" method="post">
         <div>
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
+            <input type="text" th:field="*{nome}" id="nome" required>
         </div>
 
         <div>
             <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" name="endereco" required>
+            <input type="text" th:field="*{endereco}" id="endereco" required>
         </div>
 
         <div>
             <label for="capacidade">Capacidade:</label>
-            <input type="number" id="capacidade" name="capacidade" required>
+            <input type="number" th:field="*{capacidade}" id="capacidade" required>
         </div>
 
         <div>
             <label for="qtd_abrigados">Quantidade de Abrigados:</label>
-            <input type="number" id="qtd_abrigados" name="qtd_abrigados" required>
+            <input type="number" th:field="*{qtd_abrigados}" id="qtd_abrigados" required>
         </div>
 
         <button type="submit">Salvar</button>
     </form>
+
 </main>
 </body>
 </html>

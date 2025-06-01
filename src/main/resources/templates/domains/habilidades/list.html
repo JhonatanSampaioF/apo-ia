@@ -5,40 +5,35 @@
     <link rel="stylesheet" th:href="@{/css/global.css}">
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-
-<header class="main-header">
-    <div class="header-top">
-        <a th:href="@{/mvc/habilidade/create}" class="create-button">➕ Nova Habilidade</a>
-        <h1>Lista de Habilidades</h1>
-    </div>
-</header>
+<div th:insert="~{fragments/header :: header}"></div>
 
 <main>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Prioridade</th>
-            <th>Grupo Habilidade</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="hab : ${habilidades}">
-            <td th:text="${hab.id}"></td>
-            <td th:text="${hab.nome}"></td>
-            <td th:text="${hab.prioridade}"></td>
-            <td th:text="${hab.grupoHabilidadeId}"></td>
-            <td>
-                <a th:href="@{/mvc/habilidade/detail/{id}(id=${hab.id})}">🔍</a>
-                <a th:href="@{/mvc/habilidade/edit/{id}(id=${hab.id})}">✏️</a>
-                <a th:href="@{/mvc/habilidade/delete/{id}(id=${hab.id})}">🗑️</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="list-container">
+        <h2>Lista de Habilidades</h2>
+        <a th:href="@{/mvc/habilidade/form}" class="add-button">+ Nova Habilidade</a>
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Prioridade</th>
+                <th>Grupo Habilidade</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hab : ${habilidades}">
+                <td th:text="${hab.nome}"></td>
+                <td th:text="${hab.prioridade}"></td>
+                <td th:text="${hab.grupoHabilidadeNome}"></td>
+                <td>
+                    <a th:href="@{/mvc/habilidade/edit/{id}(id=${hab.id})}" class="action">✏️ Editar</a>
+                    <a th:href="@{/mvc/habilidade/delete/{id}(id=${hab.id})}" class="action danger" onclick="return confirm('Deseja realmente deletar este grupo?')">🗑️ Deletar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 </html>

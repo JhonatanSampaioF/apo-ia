@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Grupo Habilidade</title></head>
+<head>
+    <title>Grupo Habilidade</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
-<h2 th:text="${id} != null ? 'Editar Grupo de Habilidade' : 'Novo Grupo de Habilidade'"></h2>
-<form th:action="${id} != null ? @{/mvc/grupo-habilidade/edit/{id}(id=${id})} : @{/mvc/grupo-habilidade}" method="post">
-    <label>Nome:</label>
-    <input type="text" name="nome" th:value="${grupo.nome}" required/>
-    <br/>
-    <button type="submit">Salvar</button>
-</form>
-<a th:href="@{/mvc/grupo-habilidade}">Voltar</a>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<header class="main-header">
+    <div class="header-top">
+        <a th:href="@{/mvc/grupo-habilidade}" class="home-button">🔙</a>
+        <h1 th:text="${id} != null ? 'Editar Grupo de Habilidade' : 'Novo Grupo de Habilidade'"></h1>
+    </div>
+</header>
+
+<main>
+    <form th:action="${id} != null ? @{/mvc/grupo-habilidade/edit/{id}(id=${id})} : @{/mvc/grupo-habilidade}" method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" th:value="${grupo.nome}" required />
+        </div>
+
+        <button type="submit">💾 Salvar</button>
+    </form>
+</main>
 </body>
 </html>

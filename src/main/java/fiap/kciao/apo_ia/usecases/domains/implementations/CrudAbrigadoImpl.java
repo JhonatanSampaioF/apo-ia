@@ -7,12 +7,14 @@ import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoCreate
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.voluntarios.VoluntarioCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.abrigados.AbrigadoFullResponseDto;
+import fiap.kciao.apo_ia.gateways.dtos.responses.domains.voluntarios.VoluntarioFullResponseDto;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudVoluntario;
 import fiap.kciao.apo_ia.usecases.enums.ManageAction;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudAbrigado;
 import fiap.kciao.apo_ia.usecases.services.query.AbrigadoQueryService;
 import fiap.kciao.apo_ia.usecases.services.query.DoencaQueryService;
 import fiap.kciao.apo_ia.usecases.services.query.LocalQueryService;
+import fiap.kciao.apo_ia.usecases.services.query.VoluntarioQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
     private final LocalQueryService localQueryService;
     private final DoencaQueryService doencaQueryService;
     private final CrudVoluntario crudVoluntario;
+    private final VoluntarioQueryService voluntarioQueryService;
 
     @Override
     public AbrigadoFullResponseDto create(AbrigadoCreateRequestDto abrigadoCreateRequestDto) {
@@ -61,12 +64,18 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
     public AbrigadoFullResponseDto update(String id, AbrigadoUpdateRequestDto abrigadoUpdateRequestDto) {
         Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(id);
 
-        abrigado.setNome(abrigadoUpdateRequestDto.getNome());
-        abrigado.setIdade(abrigadoUpdateRequestDto.getIdade());
-        abrigado.setAltura(abrigadoUpdateRequestDto.getAltura());
-        abrigado.setPeso(abrigadoUpdateRequestDto.getPeso());
-        abrigado.setCpf(abrigadoUpdateRequestDto.getCpf());
-        abrigado.setFerimento(abrigadoUpdateRequestDto.getFerimento());
+        abrigado.setNome(abrigadoUpdateRequestDto.getNome() != null
+                ? abrigadoUpdateRequestDto.getNome() : abrigado.getNome());
+        abrigado.setIdade(abrigadoUpdateRequestDto.getIdade() != null
+                ? abrigadoUpdateRequestDto.getIdade() : abrigado.getIdade());
+        abrigado.setAltura(abrigadoUpdateRequestDto.getAltura() != null
+                ? abrigadoUpdateRequestDto.getAltura() : abrigado.getAltura());
+        abrigado.setPeso(abrigadoUpdateRequestDto.getPeso() != null
+                ? abrigadoUpdateRequestDto.getPeso() : abrigado.getPeso());
+        abrigado.setCpf(abrigadoUpdateRequestDto.getCpf() != null
+                ? abrigadoUpdateRequestDto.getCpf() : abrigado.getCpf());
+        abrigado.setFerimento(abrigadoUpdateRequestDto.getFerimento() != null
+                ? abrigadoUpdateRequestDto.getFerimento() : abrigado.getFerimento());
 
         if (abrigadoUpdateRequestDto.getDoencaIds() != null && !abrigadoUpdateRequestDto.getDoencaIds().isEmpty()) {
             abrigado.setDoencaIds(new ArrayList<>());
@@ -98,6 +107,9 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
 
     @Override
     public void delete(String id) {
+        Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(id);
+        VoluntarioFullResponseDto voluntario = crudVoluntario.findByAbrigadoId(abrigado.getId());
+        voluntarioQueryService.deleteById(voluntario.getId());
         abrigadoQueryService.deleteById(id);
     }
 

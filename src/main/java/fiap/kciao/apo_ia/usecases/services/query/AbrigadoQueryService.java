@@ -34,4 +34,12 @@ public class AbrigadoQueryService {
     public void deleteById(String id) {
         abrigadoRepository.deleteById(id);
     }
+
+    public List<Abrigado> findAllContainsDoencaId(String id) {
+        return abrigadoRepository.findAllByDoencaIdsContaining(id);
+    }
+
+    public void saveAll(List<Abrigado> abrigados) {
+        abrigadoRepository.saveAll(abrigados);
+    }
 }

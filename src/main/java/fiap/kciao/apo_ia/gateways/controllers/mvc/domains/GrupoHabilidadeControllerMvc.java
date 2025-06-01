@@ -3,7 +3,9 @@ package fiap.kciao.apo_ia.gateways.controllers.mvc.domains;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.gruposHabilidades.GrupoHabilidadeCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.gruposHabilidades.GrupoHabilidadeUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.gruposHabilidades.GrupoHabilidadeFullResponseDto;
+import fiap.kciao.apo_ia.gateways.dtos.responses.domains.habilidades.HabilidadeFullResponseDto;
 import fiap.kciao.apo_ia.usecases.domains.implementations.CrudGrupoHabilidadeImpl;
+import fiap.kciao.apo_ia.usecases.domains.implementations.CrudHabilidadeImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,12 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/mvc/grupo-habilidade")
 @RequiredArgsConstructor
 public class GrupoHabilidadeControllerMvc {
 
     private final CrudGrupoHabilidadeImpl crudGrupoHabilidade;
+    private final CrudHabilidadeImpl crudHabilidadeImpl;
 
     @GetMapping
     public String list(Model model) {
@@ -24,9 +29,9 @@ public class GrupoHabilidadeControllerMvc {
         return "domains/grupo-habilidade/list";
     }
 
-    @GetMapping("/novo")
+    @GetMapping("/form")
     public String createForm(Model model) {
-        model.addAttribute("grupoHabilidade", new GrupoHabilidadeCreateRequestDto());
+        model.addAttribute("grupo", new GrupoHabilidadeCreateRequestDto());
         return "domains/grupo-habilidade/form";
     }
 
@@ -47,7 +52,7 @@ public class GrupoHabilidadeControllerMvc {
                 .build();
 
         model.addAttribute("id", id);
-        model.addAttribute("grupoHabilidade", dto);
+        model.addAttribute("grupo", dto);
         return "domains/grupo-habilidade/form";
     }
 
@@ -62,9 +67,20 @@ public class GrupoHabilidadeControllerMvc {
         return "redirect:/mvc/grupo-habilidade";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id) {
         crudGrupoHabilidade.delete(id);
         return "redirect:/mvc/grupo-habilidade";
+    }
+
+    // DETALHES
+    @GetMapping("/{id}")
+    public String detail(@PathVariable String id, Model model) {
+        GrupoHabilidadeFullResponseDto grupoHabilidade = crudGrupoHabilidade.findById(id);
+        List<HabilidadeFullResponseDto> habilidades = crudHabilidadeImpl.findByGroupId(id);
+
+        model.addAttribute("grupo", grupoHabilidade);
+        model.addAttribute("habilidades", habilidades);
+        return "domains/grupo-habilidade/detail";
     }
 }

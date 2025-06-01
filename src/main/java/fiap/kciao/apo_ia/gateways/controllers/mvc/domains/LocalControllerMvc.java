@@ -23,7 +23,7 @@ public class LocalControllerMvc {
         return "domains/locais/list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/form")
     public String showForm(Model model) {
         model.addAttribute("local", new LocalCreateRequestDto());
         return "domains/locais/form";
@@ -54,7 +54,7 @@ public class LocalControllerMvc {
         return "redirect:/mvc/local";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id) {
         crudLocal.delete(id);
         return "redirect:/mvc/local";

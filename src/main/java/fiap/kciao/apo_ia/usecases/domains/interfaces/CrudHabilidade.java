@@ -12,4 +12,5 @@ public interface CrudHabilidade {
     public HabilidadeFullResponseDto findById(String id);
     public List<HabilidadeFullResponseDto> findAll();
     public void delete(String id);
+    List<HabilidadeFullResponseDto> findByGroupId(String id);
 }

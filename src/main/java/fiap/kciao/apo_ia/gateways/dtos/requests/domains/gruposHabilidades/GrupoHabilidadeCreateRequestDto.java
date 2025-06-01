@@ -13,6 +13,4 @@ import lombok.NoArgsConstructor;
 public class GrupoHabilidadeCreateRequestDto {
     @NotEmpty
     private String nome;
-    @NotEmpty
-    private String grupoHabilidadeId;
 }

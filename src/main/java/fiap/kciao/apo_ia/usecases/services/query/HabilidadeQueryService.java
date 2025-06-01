@@ -1,6 +1,7 @@
 package fiap.kciao.apo_ia.usecases.services.query;
 
 import fiap.kciao.apo_ia.domains.Habilidade;
+import fiap.kciao.apo_ia.gateways.dtos.responses.domains.habilidades.HabilidadeFullResponseDto;
 import fiap.kciao.apo_ia.gateways.repositories.HabilidadeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,9 @@ public class HabilidadeQueryService {
 
     public List<Habilidade> findAllById(List<String> ids) {
         return habilidadeRepository.findAllById(ids);
+    }
+
+    public List<Habilidade> findAllByGroupId(String id) {
+        return habilidadeRepository.findAllByGrupoHabilidadeId(id);
     }
 }
