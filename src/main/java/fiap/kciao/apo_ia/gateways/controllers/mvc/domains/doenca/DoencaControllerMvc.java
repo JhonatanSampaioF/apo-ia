@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/doenca")
+@RequestMapping("/mvc/doenca")
 @RequiredArgsConstructor
 public class DoencaControllerMvc {
 
@@ -51,14 +51,14 @@ public class DoencaControllerMvc {
     @PostMapping
     public String create(@ModelAttribute("doenca") @Valid DoencaCreateRequestDto dto) {
         crudDoenca.create(dto);
-        return "redirect:/doenca";
+        return "redirect:/mvc/doenca";
     }
 
     // EDIÇÃO
     @PostMapping("/edit/{id}")
     public String update(@PathVariable String id, @ModelAttribute("doenca") @Valid DoencaUpdateRequestDto dto) {
         crudDoenca.update(id, dto);
-        return "redirect:/doenca";
+        return "redirect:/mvc/doenca";
     }
 
     // DETALHES
@@ -73,6 +73,6 @@ public class DoencaControllerMvc {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id) {
         crudDoenca.delete(id);
-        return "redirect:/doenca";
+        return "redirect:/mvc/doenca";
     }
 }

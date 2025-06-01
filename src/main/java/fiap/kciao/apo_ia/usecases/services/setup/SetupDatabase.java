@@ -20,13 +20,16 @@ public class SetupDatabase {
     private final VoluntarioQueryService voluntarioQueryService;
     private final GrupoHabilidadeQueryService grupoHabilidadeQueryService;
     private final HabilidadeQueryService habilidadeQueryService;
+    private final DoencaQueryService doencaQueryService;
 
     public void initializeDatabase() {
         criarUsuarioAdmin();
         criarLocal();
         criarGruposEHabilidades();
-        criarAbrigadosEVoluntarios();
+        List<Doenca> doencas = criarDoencas();
+        criarAbrigadosEVoluntarios(doencas);
     }
+
 
     private void criarUsuarioAdmin() {
         String emailAdmin = "admin@email.com";
@@ -87,13 +90,35 @@ public class SetupDatabase {
         }
     }
 
-    private void criarAbrigadosEVoluntarios() {
+    private List<Doenca> criarDoencas() {
+        if (doencaQueryService.findAll().isEmpty()) {
+            List<Doenca> doencas = List.of(
+                    Doenca.builder().nome("Gripe").gravidade("Leve").build(),
+                    Doenca.builder().nome("Infecção").gravidade("Moderada").build(),
+                    Doenca.builder().nome("Fratura").gravidade("Grave").build()
+            );
+            doencas = doencas.stream().map(doencaQueryService::save).toList();
+            log.info("Doenças criadas.");
+            return doencas;
+        } else {
+            log.info("Doenças já existem.");
+            return doencaQueryService.findAll();
+        }
+    }
+
+    private void criarAbrigadosEVoluntarios(List<Doenca> doencas) {
         if (abrigadoQueryService.findAll().isEmpty()) {
             String localId = localQueryService.findAll().get(0).getId();
             List<String> todasHabilidades = habilidadeQueryService.findAll().stream().map(Habilidade::getId).toList();
 
             for (int i = 1; i <= 14; i++) {
                 boolean voluntario = i <= 7;
+
+                List<String> doencaIds = new ArrayList<>();
+                if (!voluntario && i % 2 == 0 && !doencas.isEmpty()) {
+                    doencaIds.add(doencas.get(i % doencas.size()).getId());
+                }
+
                 Abrigado abrigado = Abrigado.builder()
                         .nome("Abrigado " + i)
                         .idade(20 + i)
@@ -103,7 +128,7 @@ public class SetupDatabase {
                         .ferimento(i % 3 == 0 ? "Corte leve" : null)
                         .voluntario(voluntario)
                         .localId(localId)
-                        .doencaIds(Collections.emptyList())
+                        .doencaIds(doencaIds)
                         .build();
                 abrigado = abrigadoQueryService.save(abrigado);
 
@@ -123,4 +148,5 @@ public class SetupDatabase {
             log.info("Abrigados e voluntarios ja existem.");
         }
     }
+
 }

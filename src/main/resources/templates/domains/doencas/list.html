@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Doenças - Apo.IA</title>
+    <title>Home - Apo.IA</title>
     <link rel="stylesheet" th:href="@{/css/global.css}">
 </head>
 <body>
 <header>
-    <h1>Lista de Doenças</h1>
+    <h1>Apo.IA - Sistema de Apoio a Centros Humanitários</h1>
     <nav>
-        <a th:href="@{/home}">🏠 Voltar para Home</a>
+        <a th:href="@{/mvc/abrigado}">Abrigados</a>
+        <a th:href="@{/mvc/doenca}">Doenças</a>
+        <a th:href="@{/mvc/voluntario}">Voluntários</a>
+        <a th:href="@{/mvc/habilidade}">Habilidades</a>
+        <a th:href="@{/mvc/grupo-habilidade}">Grupos de Habilidade</a>
+        <a th:href="@{/mvc/local}">Locais</a>
+        <a th:href="@{/mvc/usuario}">Usuários</a>
+        <a th:href="@{/mvc/sugestao-ia}">Sugestão IA</a>
     </nav>
 </header>
-
 <main>
-    <a th:href="@{/doenca/form}" class="button">+ Nova Doença</a>
-    <table>
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Gravidade</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="doenca : ${doencas}">
-            <td th:text="${doenca.nome}"></td>
-            <td th:text="${doenca.gravidade}"></td>
-            <td>
-                <a th:href="@{'/doenca/' + ${doenca.id}}">🔍 Ver</a> |
-                <a th:href="@{'/doenca/edit/' + ${doenca.id}}">✏️ Editar</a> |
-                <a th:href="@{'/doenca/delete/' + ${doenca.id}}" onclick="return confirm('Deseja realmente excluir?')">🗑️ Excluir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="list-container">
+        <a th:href="@{/mvc/doenca/form}" class="add-button">+ Nova Doença</a>
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Gravidade</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="doenca : ${doencas}">
+                <td th:text="${doenca.nome}"></td>
+                <td th:text="${doenca.gravidade}"></td>
+                <td>
+                    <a th:href="@{'/mvc/doenca/' + ${doenca.id}}" class="action">🔍 Ver</a>
+                    <a th:href="@{'/mvc/doenca/edit/' + ${doenca.id}}" class="action">✏️ Editar</a>
+                    <a th:href="@{'/mvc/doenca/delete/' + ${doenca.id}}" class="action danger" onclick="return confirm('Deseja realmente excluir?')">🗑️ Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
-</html>
