@@ -33,6 +33,10 @@ public class DoencaQueryService {
         return doencaRepository.findAll();
     }
 
+    public List<Doenca> findAllById(List<String> ids) {
+        return doencaRepository.findAllById(ids);
+    }
+
     public void deleteById(String id) {
         doencaRepository.deleteById(id);
     }

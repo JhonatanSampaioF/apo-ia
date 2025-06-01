@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${id != null} ? 'Editar Voluntário' : 'Cadastrar Voluntário'">Formulário - Voluntário</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="main-header">
+    <div class="header-top">
+        <a th:href="@{/mvc/voluntario}" class="home-button">🔙</a>
+        <h1 th:text="${id != null} ? 'Editar Voluntário' : 'Cadastrar Voluntário'"></h1>
+    </div>
+</header>
+
+<main>
+    <form th:action="@{${id != null} ? '/mvc/voluntario/edit/' + ${id} : '/mvc/voluntario'}"
+          th:object="${voluntario}" method="post">
+        <!-- Capacidade Motora -->
+        <div class="form-group">
+            <label for="capacidade_motora">Capacidade Motora:</label>
+            <select id="capacidade_motora" th:field="*{capacidade_motora}" required>
+                <option th:each="capacidade : ${capacidades}"
+                        th:value="${capacidade}"
+                        th:text="${capacidade}">
+                </option>
+            </select>
+        </div>
+
+        <!-- Habilidades (múltiplas) -->
+        <div class="form-group">
+            <label for="habilidadeIds">Habilidades:</label>
+            <select id="habilidadeIds" multiple th:field="*{habilidadeIds}">
+                <option th:each="habilidade : ${habilidades}"
+                        th:value="${habilidade.id}"
+                        th:text="${habilidade.nome}">
+                </option>
+            </select>
+        </div>
+
+        <button type="submit">💾 Salvar</button>
+    </form>
+</main>
+</body>
+</html>

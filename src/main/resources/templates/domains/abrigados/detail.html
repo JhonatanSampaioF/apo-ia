@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Abrigado</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="header-detalhe">
+    <div class="header-content">
+        <nav>
+            <a th:href="@{/mvc/abrigado}">🔙 Voltar para lista</a>
+        </nav>
+        <h1>Detalhes do Abrigado</h1>
+    </div>
+</header>
+
+<main>
+    <p><strong>Nome:</strong> <span th:text="${abrigado.nome}"></span></p>
+    <p><strong>Idade:</strong> <span th:text="${abrigado.idade}"></span></p>
+    <p><strong>Altura:</strong> <span th:text="${abrigado.altura}"></span> m</p>
+    <p><strong>Peso:</strong> <span th:text="${abrigado.peso}"></span> kg</p>
+    <p><strong>CPF:</strong> <span th:text="${abrigado.cpf}"></span></p>
+    <p><strong>É voluntário:</strong> <span th:text="${abrigado.voluntario} ? 'Sim' : 'Não'"></span></p>
+    <p><strong>Ferimento:</strong> <span th:text="${abrigado.ferimento}"></span></p>
+
+    <p><strong>Local:</strong> <span th:text="${nomeLocal}"></span></p>
+
+    <div th:if="${#lists.isEmpty(nomesDoencas) == false}">
+        <p><strong>Doenças:</strong></p>
+        <ul>
+            <li th:each="nome : ${nomesDoencas}" th:text="${nome}"></li>
+        </ul>
+    </div>
+</main>
+</body>
+</html>

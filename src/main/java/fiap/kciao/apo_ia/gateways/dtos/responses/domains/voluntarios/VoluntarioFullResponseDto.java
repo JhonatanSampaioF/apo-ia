@@ -14,5 +14,7 @@ public class VoluntarioFullResponseDto {
     private String alocacao;
     private String capacidade_motora;
     private String abrigadoId;
+    private String abrigadoNome;
+    private String abrigadoCpf;
     private List<String> habilidadeIds;
 }

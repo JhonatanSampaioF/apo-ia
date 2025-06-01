@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Grupo Habilidade</title></head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<h2>Lista de Grupos de Habilidade</h2>
+<a th:href="@{/mvc/grupo-habilidade/new}">Novo Grupo</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="grupo : ${grupos}">
+        <td th:text="${grupo.id}"></td>
+        <td th:text="${grupo.nome}"></td>
+        <td>
+            <a th:href="@{/mvc/grupo-habilidade/edit/{id}(id=${grupo.id})}">Editar</a>
+            <form th:action="@{/mvc/grupo-habilidade/delete/{id}(id=${grupo.id})}" method="post" style="display:inline">
+                <button type="submit">Deletar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

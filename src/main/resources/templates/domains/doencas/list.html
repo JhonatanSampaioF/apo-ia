@@ -5,19 +5,7 @@
     <link rel="stylesheet" th:href="@{/css/global.css}">
 </head>
 <body>
-<header>
-    <h1>Apo.IA - Sistema de Apoio a Centros Humanitários</h1>
-    <nav>
-        <a th:href="@{/mvc/abrigado}">Abrigados</a>
-        <a th:href="@{/mvc/doenca}">Doenças</a>
-        <a th:href="@{/mvc/voluntario}">Voluntários</a>
-        <a th:href="@{/mvc/habilidade}">Habilidades</a>
-        <a th:href="@{/mvc/grupo-habilidade}">Grupos de Habilidade</a>
-        <a th:href="@{/mvc/local}">Locais</a>
-        <a th:href="@{/mvc/usuario}">Usuários</a>
-        <a th:href="@{/mvc/sugestao-ia}">Sugestão IA</a>
-    </nav>
-</header>
+<div th:replace="fragments/header :: header"></div>
 <main>
     <div class="list-container">
         <a th:href="@{/mvc/doenca/form}" class="add-button">+ Nova Doença</a>

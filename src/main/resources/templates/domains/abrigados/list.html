@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Abrigados</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main>
+    <div class="list-container">
+        <a th:href="@{/mvc/abrigado/form}" class="add-button">+ Novo Abrigado</a>
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>CPF</th>
+                <th>Voluntário</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="abrigado : ${abrigados}">
+                <td th:text="${abrigado.nome}"></td>
+                <td th:text="${abrigado.idade}"></td>
+                <td th:text="${abrigado.cpf}"></td>
+                <td th:text="${abrigado.voluntario} ? 'Sim' : 'Não'"></td>
+                <td>
+                    <a th:href="@{'/mvc/abrigado/' + ${abrigado.id}}">🔍 Ver</a>
+                    <a th:href="@{'/mvc/abrigado/edit/' + ${abrigado.id}}">✏️ Editar</a>
+                    <a th:href="@{'/mvc/abrigado/delete/' + ${abrigado.id}}" onclick="return confirm('Deseja excluir?')">🗑️ Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

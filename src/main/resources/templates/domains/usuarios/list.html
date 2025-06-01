@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="main-header">
+    <div class="header-top">
+        <a th:href="@{/mvc/usuario/create}" class="create-button">➕ Novo Usuário</a>
+        <h1>Lista de Usuários</h1>
+    </div>
+</header>
+
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}">ID</td>
+            <td th:text="${usuario.nome}">Nome</td>
+            <td th:text="${usuario.email}">Email</td>
+            <td>
+                <a th:href="@{/mvc/usuario/detail/{id}(id=${usuario.id})}">🔍</a>
+                <a th:href="@{/mvc/usuario/edit/{id}(id=${usuario.id})}">✏️</a>
+                <a th:href="@{/mvc/usuario/delete/{id}(id=${usuario.id})}">🗑️</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Grupo de Habilidade</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="main-header">
+    <div class="header-top">
+        <a th:href="@{/mvc/grupo-habilidade}" class="home-button">🔙</a>
+        <h1>Detalhes do Grupo de Habilidade</h1>
+    </div>
+</header>
+
+<main>
+    <section class="detail-section">
+        <div class="detail-group">
+            <label>ID:</label>
+            <span th:text="${grupo.id}">ID</span>
+        </div>
+        <div class="detail-group">
+            <label>Nome:</label>
+            <span th:text="${grupo.nome}">Nome</span>
+        </div>
+    </section>
+</main>
+</body>
+</html>

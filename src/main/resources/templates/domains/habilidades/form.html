@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nova Habilidade</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="main-header">
+    <div class="header-top">
+        <a th:href="@{/mvc/habilidade}" class="home-button">🔙</a>
+        <h1>Cadastrar Nova Habilidade</h1>
+    </div>
+</header>
+
+<main>
+    <form th:action="@{/mvc/habilidade/create}" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+
+        <div>
+            <label for="prioridade">Prioridade:</label>
+            <input type="number" id="prioridade" name="prioridade" required>
+        </div>
+
+        <div>
+            <label for="grupoHabilidadeId">Grupo de Habilidade:</label>
+            <select id="grupoHabilidadeId" name="grupoHabilidadeId" required>
+                <option value="" disabled selected>Selecione</option>
+                <option th:each="grupo : ${grupos}" th:value="${grupo.id}" th:text="${grupo.nome}"></option>
+            </select>
+        </div>
+
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+</body>
+</html>

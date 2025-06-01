@@ -6,7 +6,6 @@ import fiap.kciao.apo_ia.domains.Voluntario;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.voluntarios.VoluntarioCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.voluntarios.VoluntarioUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.voluntarios.VoluntarioFullResponseDto;
-import fiap.kciao.apo_ia.gateways.mappers.domains.VoluntarioMapper;
 import fiap.kciao.apo_ia.usecases.enums.ManageAction;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudVoluntario;
 import fiap.kciao.apo_ia.usecases.services.query.AbrigadoQueryService;
@@ -15,6 +14,7 @@ import fiap.kciao.apo_ia.usecases.services.query.VoluntarioQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static fiap.kciao.apo_ia.gateways.mappers.domains.VoluntarioMapper.*;
@@ -31,6 +31,14 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
         Voluntario voluntario = toEntityCreate(voluntarioCreateRequestDto);
         Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(voluntarioCreateRequestDto.getAbrigadoId());
 
+        if (voluntarioCreateRequestDto.getHabilidadeIds() != null && !voluntarioCreateRequestDto.getHabilidadeIds().isEmpty()) {
+            voluntario.setHabilidadeIds(new ArrayList<>());
+            List<Habilidade> habilidades = habilidadeQueryService.findAllById(voluntarioCreateRequestDto.getHabilidadeIds());
+            if (habilidades != null && !habilidades.isEmpty()) {
+                voluntario.getHabilidadeIds().addAll(habilidades.stream().map(Habilidade::getId).toList());
+            }
+        }
+
         voluntario.setAbrigadoId(abrigado.getId());
 
         return toFullResponseDto(voluntarioQueryService.save(voluntario));
@@ -40,7 +48,15 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
     public VoluntarioFullResponseDto update(String id, VoluntarioUpdateRequestDto voluntarioUpdateRequestDto) {
         Voluntario voluntario = voluntarioQueryService.findByIdOrThrow(id);
 
-        voluntario.setCapacidade_motora(voluntario.getCapacidade_motora());
+        voluntario.setCapacidade_motora(voluntarioUpdateRequestDto.getCapacidade_motora());
+
+        if (voluntarioUpdateRequestDto.getHabilidadeIds() != null && !voluntarioUpdateRequestDto.getHabilidadeIds().isEmpty()) {
+            voluntario.setHabilidadeIds(new ArrayList<>());
+            List<Habilidade> habilidades = habilidadeQueryService.findAllById(voluntarioUpdateRequestDto.getHabilidadeIds());
+            if (habilidades != null && !habilidades.isEmpty()) {
+                voluntario.setHabilidadeIds(habilidades.stream().map(Habilidade::getId).toList());
+            }
+        }
 
         return toFullResponseDto(voluntarioQueryService.save(voluntario));
     }

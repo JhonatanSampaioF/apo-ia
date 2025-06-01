@@ -36,4 +36,8 @@ public class HabilidadeQueryService {
         return habilidadeRepository.findById(id)
                 .orElse(null);
     }
+
+    public List<Habilidade> findAllById(List<String> ids) {
+        return habilidadeRepository.findAllById(ids);
+    }
 }

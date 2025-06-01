@@ -1,4 +1,4 @@
-package fiap.kciao.apo_ia.gateways.controllers.mvc.domains.doenca;
+package fiap.kciao.apo_ia.gateways.controllers.mvc.domains;
 
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.doencas.DoencaCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.doencas.DoencaUpdateRequestDto;

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Voluntário</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="header-detalhe">
+    <div class="header-content">
+        <nav>
+            <a th:href="@{/mvc/voluntario}">🔙 Voltar para lista</a>
+        </nav>
+        <h1>Detalhes do Voluntário</h1>
+    </div>
+</header>
+
+<main>
+    <section class="list-container">
+        <div class="detail-group">
+            <label><strong>Nome:</strong></label>
+            <span th:text="${abrigado.nome}">Nome do abrigado</span>
+        </div>
+        <div class="detail-group">
+            <label><strong>CPF:</strong></label>
+            <span th:text="${abrigado.cpf}">000.000.000-00</span>
+        </div>
+        <div class="detail-group">
+            <label><strong>Capacidade Motora:</strong></label>
+            <span th:text="${voluntario.capacidade_motora}">Normal</span>
+        </div>
+        <div class="detail-group">
+            <label><strong>Alocação:</strong></label>
+            <span th:text="${voluntario.alocacao}">Disponível</span>
+        </div>
+        <div class="detail-group">
+            <label><strong>Habilidades:</strong></label>
+            <ul>
+                <li th:each="habilidade : ${habilidades}" th:text="${habilidade.nome}">Nome da habilidade</li>
+            </ul>
+        </div>
+    </section>
+</main>
+</body>
+</html>

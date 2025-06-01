@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="header">
+    <header class="main-header">
+        <div class="header-top">
+            <a th:href="@{/home}" class="home-button">🏠</a>
+            <h1>Apo.IA - Sistema de Apoio a Centros Humanitários</h1>
+        </div>
+        <nav>
+            <a th:href="@{/mvc/abrigado}">Abrigados</a>
+            <a th:href="@{/mvc/doenca}">Doenças</a>
+            <a th:href="@{/mvc/voluntario}">Voluntários</a>
+            <a th:href="@{/mvc/habilidade}">Habilidades</a>
+            <a th:href="@{/mvc/grupo-habilidade}">Grupos de Habilidade</a>
+            <a th:href="@{/mvc/local}">Locais</a>
+            <a th:href="@{/mvc/usuario}">Usuários</a>
+            <a th:href="@{/mvc/sugestao-ia}">Sugestão IA</a>
+        </nav>
+    </header>
+</div>
+</body>
+</html>

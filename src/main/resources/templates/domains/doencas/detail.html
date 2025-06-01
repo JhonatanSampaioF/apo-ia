@@ -5,12 +5,17 @@
     <link rel="stylesheet" th:href="@{/css/global.css}">
 </head>
 <body>
-<header>
-    <h1>Detalhes da Doença</h1>
-    <nav>
-        <a th:href="@{/doenca}">🔙 Voltar para lista</a>
-    </nav>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="header-detalhe">
+    <div class="header-content">
+        <nav>
+            <a th:href="@{/mvc/doenca}">🔙 Voltar para lista</a>
+        </nav>
+        <h1>Detalhes da Doença</h1>
+    </div>
 </header>
+
 
 <main>
     <p><strong>Nome:</strong> <span th:text="${doenca.nome}"></span></p>

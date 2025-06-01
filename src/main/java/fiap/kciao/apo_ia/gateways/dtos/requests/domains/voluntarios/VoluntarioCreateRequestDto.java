@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,4 +18,5 @@ public class VoluntarioCreateRequestDto {
     private String capacidade_motora;
     @NotNull
     private String abrigadoId;
+    private List<String> habilidadeIds;
 }

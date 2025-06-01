@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Voluntários</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main>
+    <div class="list-container">
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Capacidade Motora</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="voluntario : ${voluntarios}">
+                <td th:text="${voluntario.abrigadoNome}">Nome</td>
+                <td th:text="${voluntario.abrigadoCpf}">CPF</td>
+                <td th:text="${voluntario.capacidade_motora}">Capacidade</td>
+                <td>
+                    <a th:href="@{'/mvc/voluntario/' + ${voluntario.id}}" class="action">🔍 Ver</a>
+                    <a th:href="@{'/mvc/voluntario/edit/' + ${voluntario.id}}" class="action">✏️ Editar</a>
+                    <a th:href="@{'/mvc/voluntario/delete/' + ${voluntario.id}}" class="action danger" onclick="return confirm('Deseja realmente excluir?')">🗑️ Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

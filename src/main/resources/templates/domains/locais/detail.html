@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Local</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<header class="main-header">
+    <div class="header-top">
+        <a th:href="@{/mvc/local}" class="home-button">🔙</a>
+        <h1>Detalhes do Local</h1>
+    </div>
+</header>
+
+<main>
+    <section class="detail-section">
+        <div class="detail-group">
+            <label>ID:</label>
+            <span th:text="${local.id}">ID</span>
+        </div>
+        <div class="detail-group">
+            <label>Nome:</label>
+            <span th:text="${local.nome}">Nome</span>
+        </div>
+        <div class="detail-group">
+            <label>Endereço:</label>
+            <span th:text="${local.endereco}">Endereço</span>
+        </div>
+        <div class="detail-group">
+            <label>Capacidade:</label>
+            <span th:text="${local.capacidade}">Capacidade</span>
+        </div>
+        <div class="detail-group">
+            <label>Quantidade de Abrigados:</label>
+            <span th:text="${local.qtd_abrigados}">Qtd</span>
+        </div>
+    </section>
+</main>
+</body>
+</html>
