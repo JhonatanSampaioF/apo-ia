@@ -10,8 +10,8 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO rabbitMQ
-	// TODO testes unitários
-	// TODO testes de integração
 	// TODO mvc
+	// TODO criar vídeo demonstração da solução completa 10min
+	// TODO criar vídeo pitch 3min
+	// TODO incluir link do deploy
 }

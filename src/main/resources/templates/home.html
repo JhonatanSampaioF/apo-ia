@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home - Apo.IA</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<header>
+    <h1>Apo.IA - Sistema de Apoio a Centros Humanitários</h1>
+    <nav>
+        <a th:href="@{/abrigado}">Abrigados</a>
+        <a th:href="@{/doenca}">Doenças</a>
+        <a th:href="@{/voluntario}">Voluntários</a>
+        <a th:href="@{/habilidade}">Habilidades</a>
+        <a th:href="@{/grupo-habilidade}">Grupos de Habilidade</a>
+        <a th:href="@{/local}">Locais</a>
+        <a th:href="@{/usuario}">Usuários</a>
+        <a th:href="@{/sugestao-ia}">Sugestão IA</a>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Sobre o sistema</h2>
+        <p>O Apo.IA é um sistema desenvolvido para facilitar a gestão de centros humanitários em situações de calamidade.</p>
+        <ul>
+            <li>📋 Cadastro e acompanhamento de <strong>abrigados</strong>, incluindo dados de saúde.</li>
+            <li>👩‍⚕️ Gestão de <strong>voluntários</strong> com habilidades específicas e alocação inteligente.</li>
+            <li>🏥 Monitoramento de <strong>doenças e ferimentos</strong> entre os abrigados.</li>
+            <li>📍 Organização de <strong>locais de abrigo</strong> e controle de capacidade.</li>
+            <li>🔐 Controle de <strong>usuários administrativos</strong> e permissões.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Integração com IA</h2>
+        <p>O sistema conta com integração à inteligência artificial via <strong>Spring AI + Ollama</strong>, permitindo:</p>
+        <ul>
+            <li>🔄 Sugestão automática de alocação de voluntários com base em habilidades, localização e necessidade do abrigo</li>
+            <li>🤖 Interpretação de dados em tempo real sobre doenças e ferimentos</li>
+            <li>📊 Geração de relatórios e previsões de demanda para apoio logístico</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Repositório e documentação</h2>
+        <ul>
+            <li>📂 <a href="https://github.com/SeuUsuario/apo-ia" target="_blank">Repositório GitHub</a> (exemplo)</li>
+            <li>📑 <a href="https://documentacao.apoia.com.br" target="_blank">Documentação Técnica</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Tecnologias utilizadas</h2>
+        <ul>
+            <li>🧠 Spring Boot, Spring Security, Spring AI, Thymeleaf</li>
+            <li>🗃️ MongoDB</li>
+            <li>📨 RabbitMQ</li>
+            <li>🎨 HTML, CSS (Thymeleaf), JS</li>
+            <li>📦 Docker, Swagger</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Equipe de Desenvolvimento</h2>
+        <ul>
+            <li>👨‍💻 Jhonatan Sampaio — Backend Developer - RM553791</li>
+            <li>👨‍💻 Gustavo Vieira Bargas — Database Analyst - RM553471</li>
+            <li>👨‍💻 Vivian Sy Ting Wu — Frontend Developer - RM553169</li>
+        </ul>
+    </section>
+
+</main>
+</body>
+</html>

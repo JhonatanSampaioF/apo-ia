@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${doenca?.id != null} ? 'Editar Doença' : 'Nova Doença'">Formulário - Doença</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<header>
+    <h1 th:text="${doenca?.id != null} ? 'Editar Doença' : 'Nova Doença'"></h1>
+    <nav>
+        <a th:href="@{/doenca}">🔙 Voltar para lista</a>
+    </nav>
+</header>
+
+<main>
+    <form th:action="@{${doenca?.id != null} ? '/doenca/edit/' + ${doenca.id} : '/doenca'}" th:object="${doenca}" method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required />
+        </div>
+        <div class="form-group">
+            <label for="gravidade">Gravidade:</label>
+            <input type="text" id="gravidade" th:field="*{gravidade}" required />
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+</body>
+</html>

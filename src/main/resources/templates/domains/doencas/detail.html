@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes da Doença</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<header>
+    <h1>Detalhes da Doença</h1>
+    <nav>
+        <a th:href="@{/doenca}">🔙 Voltar para lista</a>
+    </nav>
+</header>
+
+<main>
+    <p><strong>Nome:</strong> <span th:text="${doenca.nome}"></span></p>
+    <p><strong>Gravidade:</strong> <span th:text="${doenca.gravidade}"></span></p>
+
+    <p><strong>Associada aos Abrigados:</strong></p>
+    <ul>
+        <li th:each="abrigadoId : ${doenca.abrigadoIds}" th:text="${abrigadoId}"></li>
+    </ul>
+</main>
+</body>
+</html>
