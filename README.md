@@ -101,7 +101,7 @@ ollama run llama3
 
 - 🚀 [Deploy da aplicação (placeholder)](https://)
 - 🎥 [Pitch da Solução](https://)
-- 🎬 [Demonstração completa](https://)
+- 🎬 [Demonstração completa](https://youtu.be/P6_0U3Kl9EU)
 
 ## 👨‍💻 Equipe de Desenvolvimento
 

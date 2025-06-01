@@ -3,6 +3,7 @@ package fiap.kciao.apo_ia.usecases.domains.implementations;
 import fiap.kciao.apo_ia.domains.Abrigado;
 import fiap.kciao.apo_ia.domains.Doenca;
 import fiap.kciao.apo_ia.domains.Local;
+import fiap.kciao.apo_ia.domains.Voluntario;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.voluntarios.VoluntarioCreateRequestDto;
@@ -108,8 +109,10 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
     @Override
     public void delete(String id) {
         Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(id);
-        VoluntarioFullResponseDto voluntario = crudVoluntario.findByAbrigadoId(abrigado.getId());
-        voluntarioQueryService.deleteById(voluntario.getId());
+        Voluntario voluntario = voluntarioQueryService.findByAbrigadoIdOrElseNull(abrigado.getId());
+        if (voluntario != null) {
+            voluntarioQueryService.deleteById(voluntario.getId());
+        }
         abrigadoQueryService.deleteById(id);
     }
 
