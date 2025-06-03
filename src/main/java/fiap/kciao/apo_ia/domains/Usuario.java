@@ -16,7 +16,6 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String nome;
-    @Column(name = "EMAIL_ADDRESS")
     private String email;
     private String senha;
 }

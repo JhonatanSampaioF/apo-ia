@@ -8,10 +8,10 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       maximum-pool-size: 2
-    jpa:
-      hibernate:
-        ddl-auto: update
-      database-platform: org.hibernate.dialect.OracleDialect
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.OracleDialect
   data:
     mongodb:
       uri: mongodb://localhost:27017
