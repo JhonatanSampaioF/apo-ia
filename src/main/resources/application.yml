@@ -2,20 +2,19 @@ spring:
   application:
     name: Apo.IA
   datasource:
-    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
-    username: rm553791
-    password: 180298
-    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:mysql://apoia-server.mysql.database.azure.com.mysql.database.azure.com:3306/Apo-ia?useSSL=true&requireSSL=false&serverTimezone=UTC
+    username: cfcgslijye@apoia-server.mysql.database.azure.com
+    password: KiwiRosa@2025
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      maximum-pool-size: 2
+      maximum-pool-size: 10
+
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.OracleDialect
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017
-      database: apo_ia
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+
   ai:
     ollama:
       base-url: http://localhost:11434
