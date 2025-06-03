@@ -32,14 +32,13 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
         Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(voluntarioCreateRequestDto.getAbrigadoId());
 
         if (voluntarioCreateRequestDto.getHabilidadeIds() != null && !voluntarioCreateRequestDto.getHabilidadeIds().isEmpty()) {
-            voluntario.setHabilidadeIds(new ArrayList<>());
             List<Habilidade> habilidades = habilidadeQueryService.findAllById(voluntarioCreateRequestDto.getHabilidadeIds());
             if (habilidades != null && !habilidades.isEmpty()) {
-                voluntario.getHabilidadeIds().addAll(habilidades.stream().map(Habilidade::getId).toList());
+                voluntario.getHabilidades().addAll(habilidades);
             }
         }
 
-        voluntario.setAbrigadoId(abrigado.getId());
+        voluntario.setAbrigado(abrigado);
 
         return toFullResponseDto(voluntarioQueryService.save(voluntario));
     }
@@ -52,10 +51,14 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
                 ? voluntarioUpdateRequestDto.getCapacidade_motora() : voluntario.getCapacidade_motora());
 
         if (voluntarioUpdateRequestDto.getHabilidadeIds() != null && !voluntarioUpdateRequestDto.getHabilidadeIds().isEmpty()) {
-            voluntario.setHabilidadeIds(new ArrayList<>());
+            List<Habilidade> habilidadesAntigas = voluntario.getHabilidades();
             List<Habilidade> habilidades = habilidadeQueryService.findAllById(voluntarioUpdateRequestDto.getHabilidadeIds());
             if (habilidades != null && !habilidades.isEmpty()) {
-                voluntario.setHabilidadeIds(habilidades.stream().map(Habilidade::getId).toList());
+                for (Habilidade habilidade : habilidades) {
+                    if (!habilidadesAntigas.contains(habilidade)) {
+                        voluntario.getHabilidades().add(habilidade);
+                    }
+                }
             }
         }
 
@@ -75,7 +78,7 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
     @Override
     public void delete(String id) {
         Voluntario voluntario = voluntarioQueryService.findByIdOrThrow(id);
-        Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(voluntario.getAbrigadoId());
+        Abrigado abrigado = abrigadoQueryService.findByIdOrThrow(voluntario.getAbrigado().getId());
         abrigado.setVoluntario(false);
         abrigadoQueryService.save(abrigado);
         voluntarioQueryService.deleteById(id);
@@ -87,8 +90,8 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
         Habilidade habilidade = habilidadeQueryService.findByIdOrThrow(habilidadeId);
 
         switch (action) {
-            case ADD -> voluntario.getHabilidadeIds().add(habilidade.getId());
-            case REMOVE -> voluntario.getHabilidadeIds().remove(habilidade.getId());
+            case ADD -> voluntario.getHabilidades().add(habilidade);
+            case REMOVE -> voluntario.getHabilidades().remove(habilidade);
         }
 
         return toFullResponseDto(voluntarioQueryService.save(voluntario));

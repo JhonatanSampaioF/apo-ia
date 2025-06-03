@@ -33,12 +33,12 @@ public class VoluntarioQueryService {
     }
 
     public Voluntario findByAbrigadoIdOrElseNull(String id) {
-        return voluntarioRepository.findByAbrigadoId(id)
+        return voluntarioRepository.findByAbrigado_Id(id)
                 .orElse(null);
     }
 
     public List<Voluntario> findAllByHabilidadeId(String id) {
-        return voluntarioRepository.findAllByHabilidadeIdsContaining(id);
+        return voluntarioRepository.findAllByHabilidades_Id(id);
     }
 
     public void saveAll(List<Voluntario> voluntarios) {

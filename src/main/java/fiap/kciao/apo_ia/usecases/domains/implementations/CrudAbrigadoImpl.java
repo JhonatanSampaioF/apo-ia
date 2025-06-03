@@ -39,14 +39,13 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
 
         Local local = localQueryService.findByIdOrThrow(abrigadoCreateRequestDto.getLocalId());
         if (abrigadoCreateRequestDto.getDoencaIds() != null && !abrigadoCreateRequestDto.getDoencaIds().isEmpty()) {
-            abrigado.setDoencaIds(new ArrayList<>());
             List<Doenca> doencas = doencaQueryService.findAllById(abrigadoCreateRequestDto.getDoencaIds());
             if (doencas != null && !doencas.isEmpty()) {
-                abrigado.getDoencaIds().addAll(doencas.stream().map(Doenca::getId).toList());
+                abrigado.setDoencas(doencas);
             }
         }
 
-        abrigado.setLocalId(local.getId());
+        abrigado.setLocal(local);
 
         Abrigado savedAbrigado = abrigadoQueryService.save(abrigado);
 
@@ -79,11 +78,14 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
                 ? abrigadoUpdateRequestDto.getFerimento() : abrigado.getFerimento());
 
         if (abrigadoUpdateRequestDto.getDoencaIds() != null && !abrigadoUpdateRequestDto.getDoencaIds().isEmpty()) {
-            abrigado.setDoencaIds(new ArrayList<>());
+            List<Doenca> doencasAntigas = abrigado.getDoencas();
             List<Doenca> doencas = doencaQueryService.findAllById(abrigadoUpdateRequestDto.getDoencaIds());
-            if (doencas != null && !doencas.isEmpty()) {
-                abrigado.setDoencaIds(doencas.stream().map(Doenca::getId).toList());
+            for (Doenca doenca : doencas) {
+                if (!doencasAntigas.contains(doenca)) {
+                    abrigado.getDoencas().add(doenca);
+                }
             }
+
         }
 
         if (abrigadoUpdateRequestDto.getVoluntario() && !abrigado.getVoluntario()) {
@@ -122,8 +124,8 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
         Doenca doenca = doencaQueryService.findByIdOrThrow(doencaId);
 
         switch (action) {
-            case ADD -> abrigado.getDoencaIds().add(doenca.getId());
-            case REMOVE -> abrigado.getDoencaIds().remove(doenca.getId());
+            case ADD -> abrigado.getDoencas().add(doenca);
+            case REMOVE -> abrigado.getDoencas().remove(doenca);
         }
 
         return toFullResponseDto(abrigadoQueryService.save(abrigado));

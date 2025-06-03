@@ -79,7 +79,7 @@ public class SetupDatabase {
                     Habilidade nova = Habilidade.builder()
                             .nome(habilidade)
                             .prioridade(prioridade++)
-                            .grupoHabilidadeId(grupo.getId())
+                            .grupoHabilidade(grupo)
                             .build();
                     habilidadeQueryService.save(nova);
                 }
@@ -108,15 +108,15 @@ public class SetupDatabase {
 
     private void criarAbrigadosEVoluntarios(List<Doenca> doencas) {
         if (abrigadoQueryService.findAll().isEmpty()) {
-            String localId = localQueryService.findAll().get(0).getId();
-            List<String> todasHabilidades = habilidadeQueryService.findAll().stream().map(Habilidade::getId).toList();
+            Local local = localQueryService.findAll().get(0);
+            List<Habilidade> todasHabilidades = habilidadeQueryService.findAll();
 
             for (int i = 1; i <= 14; i++) {
                 boolean voluntario = i <= 7;
 
-                List<String> doencaIds = new ArrayList<>();
+                List<Doenca> doencas1 = new ArrayList<>();
                 if (!voluntario && i % 2 == 0 && !doencas.isEmpty()) {
-                    doencaIds.add(doencas.get(i % doencas.size()).getId());
+                    doencas1.add(doencas.get(i % doencas.size()));
                 }
 
                 Abrigado abrigado = Abrigado.builder()
@@ -127,18 +127,18 @@ public class SetupDatabase {
                         .cpf("000.000.000-" + String.format("%02d", i))
                         .ferimento(i % 3 == 0 ? "Corte leve" : null)
                         .voluntario(voluntario)
-                        .localId(localId)
-                        .doencaIds(doencaIds)
+                        .local(local)
+                        .doencas(doencas1)
                         .build();
                 abrigado = abrigadoQueryService.save(abrigado);
 
                 if (voluntario) {
-                    List<String> habilidadesAleatorias = todasHabilidades.subList(0, (i % todasHabilidades.size()) + 1);
+                    List<Habilidade> habilidadesAleatorias = todasHabilidades.subList(0, (i % todasHabilidades.size()) + 1);
                     Voluntario v = Voluntario.builder()
-                            .abrigadoId(abrigado.getId())
+                            .abrigado(abrigado)
                             .capacidade_motora("Normal")
                             .alocacao("Disponível")
-                            .habilidadeIds(habilidadesAleatorias)
+                            .habilidades(habilidadesAleatorias)
                             .build();
                     voluntarioQueryService.save(v);
                 }

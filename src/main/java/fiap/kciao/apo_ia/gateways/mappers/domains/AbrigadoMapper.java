@@ -1,6 +1,7 @@
 package fiap.kciao.apo_ia.gateways.mappers.domains;
 
 import fiap.kciao.apo_ia.domains.Abrigado;
+import fiap.kciao.apo_ia.domains.Doenca;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.abrigados.AbrigadoFullResponseDto;
 
@@ -28,8 +29,8 @@ public class AbrigadoMapper {
                 .peso(abrigado.getPeso())
                 .cpf(abrigado.getCpf())
                 .voluntario(abrigado.getVoluntario())
-                .localId(abrigado.getLocalId())
-                .doencaIds(abrigado.getDoencaIds())
+                .localId(abrigado.getLocal().getId())
+                .doencaIds(abrigado.getDoencas().stream().map(Doenca::getId).toList())
                 .build();
     }
 

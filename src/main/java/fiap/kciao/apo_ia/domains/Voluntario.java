@@ -1,10 +1,11 @@
 package fiap.kciao.apo_ia.domains;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -13,13 +14,18 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "voluntarios")
+@Entity
 public class Voluntario {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String alocacao;
     private String capacidade_motora;
 
-    private String abrigadoId;
-    private List<String> habilidadeIds;
+    @OneToOne
+    private Abrigado abrigado;
+
+    @ManyToMany
+    @JsonManagedReference
+    private List<Habilidade> habilidades;
 }

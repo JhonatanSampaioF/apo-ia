@@ -4,9 +4,10 @@ import fiap.kciao.apo_ia.configs.RabbitMQConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
 public class DLQConsumer {
 
     @RabbitListener(queues = RabbitMQConfig.DLQ)

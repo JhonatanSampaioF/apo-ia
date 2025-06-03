@@ -1,5 +1,6 @@
 package fiap.kciao.apo_ia.gateways.mappers.domains;
 
+import fiap.kciao.apo_ia.domains.Habilidade;
 import fiap.kciao.apo_ia.domains.Voluntario;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.voluntarios.VoluntarioCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.voluntarios.VoluntarioFullResponseDto;
@@ -18,8 +19,8 @@ public class VoluntarioMapper {
                 .id(voluntario.getId())
                 .alocacao(voluntario.getAlocacao())
                 .capacidade_motora(voluntario.getCapacidade_motora())
-                .habilidadeIds(voluntario.getHabilidadeIds())
-                .abrigadoId(voluntario.getAbrigadoId())
+                .habilidadeIds(voluntario.getHabilidades().stream().map(Habilidade::getId).toList())
+                .abrigadoId(voluntario.getAbrigado().getId())
                 .build();
     }
 

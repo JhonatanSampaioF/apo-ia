@@ -6,13 +6,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
+@Service
 public class InitializerConsumer {
 
     private final SetupDatabase setupDatabase;

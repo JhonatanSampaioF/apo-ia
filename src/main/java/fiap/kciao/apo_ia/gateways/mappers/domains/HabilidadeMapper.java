@@ -20,7 +20,7 @@ public class HabilidadeMapper {
                 .id(habilidade.getId())
                 .nome(habilidade.getNome())
                 .prioridade(habilidade.getPrioridade())
-                .grupoHabilidadeId(habilidade.getGrupoHabilidadeId())
+                .grupoHabilidadeId(habilidade.getGrupoHabilidade().getId())
                 .build();
     }
 

@@ -20,7 +20,6 @@ import static fiap.kciao.apo_ia.gateways.mappers.domains.DoencaMapper.*;
 @RequiredArgsConstructor
 public class CrudDoencaImpl implements CrudDoenca {
     private final DoencaQueryService doencaQueryService;
-    private final CrudAbrigado crudAbrigado;
     private final AbrigadoQueryService abrigadoQueryService;
 
     @Override
@@ -56,7 +55,7 @@ public class CrudDoencaImpl implements CrudDoenca {
         List<Abrigado> abrigados = abrigadoQueryService.findAllContainsDoencaId(doenca.getId());
         if (abrigados != null && !abrigados.isEmpty()) {
             for (Abrigado abrigado : abrigados) {
-                abrigado.getDoencaIds().remove(doenca.getId());
+                abrigado.getDoencas().remove(doenca);
             }
             abrigadoQueryService.saveAll(abrigados);
         }

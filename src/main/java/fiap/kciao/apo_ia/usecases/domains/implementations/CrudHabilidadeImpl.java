@@ -31,7 +31,7 @@ public class CrudHabilidadeImpl implements CrudHabilidade {
 
         GrupoHabilidade grupoHabilidade = grupoHabilidadeQueryService.findByIdOrThrow(habilidadeCreateRequestDto.getGrupoHabilidadeId());
 
-        habilidade.setGrupoHabilidadeId(grupoHabilidade.getId());
+        habilidade.setGrupoHabilidade(grupoHabilidade);
 
         return toFullResponseDto(habilidadeQueryService.save(habilidade));
     }
@@ -64,7 +64,7 @@ public class CrudHabilidadeImpl implements CrudHabilidade {
         List<Voluntario> voluntarios = voluntarioQueryService.findAllByHabilidadeId(habilidade.getId());
         if (voluntarios != null && !voluntarios.isEmpty()) {
             for (Voluntario voluntario : voluntarios) {
-                voluntario.getHabilidadeIds().remove(habilidade.getId());
+                voluntario.getHabilidades().remove(habilidade);
             }
             voluntarioQueryService.saveAll(voluntarios);
         }

@@ -1,11 +1,12 @@
 package fiap.kciao.apo_ia.domains;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
@@ -13,9 +14,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "abrigados")
+@Entity
 public class Abrigado {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String nome;
     private Integer idade;
@@ -25,6 +27,10 @@ public class Abrigado {
     private Boolean voluntario;
     private String ferimento;
 
-    private String localId;
-    private List<String> doencaIds;
+    @ManyToOne
+    private Local local;
+
+    @ManyToMany
+    @JsonManagedReference
+    private List<Doenca> doencas;
 }

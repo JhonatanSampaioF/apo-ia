@@ -1,6 +1,17 @@
 spring:
   application:
     name: Apo.IA
+  datasource:
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+    username: rm553791
+    password: 180298
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      maximum-pool-size: 2
+    jpa:
+      hibernate:
+        ddl-auto: update
+      database-platform: org.hibernate.dialect.OracleDialect
   data:
     mongodb:
       uri: mongodb://localhost:27017
@@ -9,14 +20,6 @@ spring:
     ollama:
       base-url: http://localhost:11434
       model: llama3
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    listener:
-      simple:
-        default-requeue-rejected: false
   thymeleaf:
     cache: false
   mvc:
