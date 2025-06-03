@@ -14,6 +14,7 @@ O **Apo.IA** é um sistema web completo voltado para gestão de pessoas em situa
 - Execução assíncrona com **RabbitMQ** (inicialização e filas).
 - Camada de autenticação e segurança com **JWT + Spring Security**.
 - Interface web (MVC) com páginas para login, cadastro e gerenciamento das entidades.
+- Mensagens de validação e erro com suporte à internacionalização em **três idiomas**: 🇧🇷 Português, 🇺🇸 Inglês e 🇪🇸 Espanhol.
 
 ---
 
@@ -96,6 +97,57 @@ Para rodar o Ollama localmente:
 ```bash
 ollama run llama3
 ```
+
+---
+
+## 🌐 Internacionalização
+
+O Apo.IA oferece suporte a mensagens de erro e validação em três idiomas:
+
+- 🇧🇷 **Português** (padrão)
+- 🇺🇸 **Inglês**
+- 🇪🇸 **Espanhol**
+
+### 📥 Como funciona:
+
+- O idioma é detectado automaticamente via header `Accept-Language` da requisição HTTP.
+- Mensagens de validação, como campos obrigatórios ou mal formatados, são retornadas de forma amigável para o idioma do usuário.
+
+### 📤 Exemplo de requisição com `Accept-Language: en`
+
+```http
+POST /usuario
+Content-Type: application/json
+Accept-Language: en
+```
+
+```body
+{
+  "email": "user@email.com",
+  "senha": "123456"
+}
+```
+
+```response
+{
+  "status": 400,
+  "error": "Bad Request",
+  "errors": [
+    {
+      "field": "nome",
+      "message": "Name is required"
+    }
+  ]
+}
+```
+> O mesmo exemplo retorna mensagens traduzidas automaticamente se o idioma for pt-BR ou es.
+
+## 🛠️ Arquivos utilizados:
+- messages.properties (Português)
+- messages_en.properties (Inglês)
+- messages_es.properties (Espanhol)
+
+Esses arquivos se encontram em src/main/resources e são utilizados para internacionalização com MessageSource do Spring.
 
 ## 🔗 Links Úteis
 
