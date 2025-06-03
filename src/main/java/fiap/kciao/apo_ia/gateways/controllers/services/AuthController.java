@@ -2,6 +2,7 @@ package fiap.kciao.apo_ia.gateways.controllers.services;
 
 import fiap.kciao.apo_ia.gateways.dtos.requests.services.LoginRequestDto;
 import fiap.kciao.apo_ia.utils.security.JwtUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +18,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequestDto request) {
+    public String login(@RequestBody @Valid LoginRequestDto request) {
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getSenha()));
         return jwtUtil.generateToken(auth.getName());

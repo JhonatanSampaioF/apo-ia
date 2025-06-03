@@ -15,22 +15,22 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class AbrigadoCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{abrigado.nome.required}")
     private String nome;
-    @NotNull
+    @NotNull(message = "{abrigado.idade.required}")
     private Integer idade;
-    @NotNull
+    @NotNull(message = "{abrigado.altura.required}")
     private Double altura;
-    @NotNull
+    @NotNull(message = "{abrigado.peso.required}")
     private Double peso;
-    @NotEmpty
+    @NotEmpty(message = "{abrigado.cpf.required}")
     @CPF
     private String cpf;
-    @NotNull
+    @NotNull(message = "{abrigado.voluntario.required}")
     private Boolean voluntario;
-    @NotEmpty
+    @NotEmpty(message = "{abrigado.ferimento.required}")
     private String ferimento;
-    @NotNull
+    @NotNull(message = "{abrigado.localId.required}")
     private String localId;
     private List<String> doencaIds;
     private List<String> habilidadeIds;

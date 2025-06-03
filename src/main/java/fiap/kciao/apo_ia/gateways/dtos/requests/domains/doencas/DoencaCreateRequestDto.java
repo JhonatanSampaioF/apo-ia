@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class DoencaCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{doenca.nome.required}")
     private String nome;
-    @NotEmpty
+    @NotEmpty(message = "{doenca.gravidade.required}")
     private String gravidade;
 }

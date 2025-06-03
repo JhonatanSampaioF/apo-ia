@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UsuarioCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{usuario.nome.required}")
     private String nome;
-    @NotEmpty
+    @NotEmpty(message = "{usuario.email.required}")
     private String email;
-    @NotEmpty
+    @NotEmpty(message = "{usuario.senha.required}")
     private String senha;
 }

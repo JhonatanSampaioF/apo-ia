@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class LocalCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{local.nome.required}")
     private String nome;
-    @NotEmpty
+    @NotEmpty(message = "{local.endereco.required}")
     private String endereco;
-    @NotNull
+    @NotNull(message = "{local.capacidade.required}")
     private Integer capacidade;
-    @NotNull
+    @NotNull(message = "{local.qtd_abrigados.required}")
     private Integer qtd_abrigados;
 }

@@ -14,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class VoluntarioCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{voluntario.capacidade_motora.required}")
     private String capacidade_motora;
-    @NotNull
+    @NotNull(message = "{voluntario.abrigadoId.required}")
     private String abrigadoId;
     private List<String> habilidadeIds;
 }

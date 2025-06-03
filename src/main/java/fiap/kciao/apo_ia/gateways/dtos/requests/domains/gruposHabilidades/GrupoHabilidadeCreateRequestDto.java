@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class GrupoHabilidadeCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{grupohabilidade.nome.required}")
     private String nome;
 }

@@ -22,7 +22,7 @@ public class CrudUsuarioImpl implements CrudUsuario {
 
     @Override
     public UsuarioFullResponseDto create(UsuarioCreateRequestDto usuarioCreateRequestDto) {
-        Usuario usuario = usuarioQueryService.findByEmailOrThrow(usuarioCreateRequestDto.getEmail());
+        Usuario usuario = usuarioQueryService.findByEmailOrNull(usuarioCreateRequestDto.getEmail());
         if (usuario != null) {
             throw new IllegalArgumentException("Email já utilizado");
         }

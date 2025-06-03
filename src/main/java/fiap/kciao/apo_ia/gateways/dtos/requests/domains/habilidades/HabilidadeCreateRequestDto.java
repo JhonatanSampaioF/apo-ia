@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class HabilidadeCreateRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "{habilidade.nome.required}")
     private String nome;
-    @NotNull
+    @NotNull(message = "{habilidade.prioridade.required}")
     private Integer prioridade;
-    @NotEmpty
+    @NotEmpty(message = "{habilidade.grupohabilidadeId.required}")
     private String grupoHabilidadeId;
 }
