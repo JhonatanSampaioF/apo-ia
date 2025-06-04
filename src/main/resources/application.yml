@@ -2,12 +2,10 @@ spring:
   application:
     name: Apo.IA
   datasource:
-    url: jdbc:mysql://apoia-server.mysql.database.azure.com.mysql.database.azure.com:3306/Apo-ia?useSSL=true&requireSSL=false&serverTimezone=UTC
-    username: cfcgslijye@apoia-server.mysql.database.azure.com
+    url: jdbc:mysql://apoia-server.mysql.database.azure.com:3306/apoia-database?sslMode=REQUIRED
+    username: cfcgslijye@apoia-server
     password: KiwiRosa@2025
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      maximum-pool-size: 10
 
   jpa:
     hibernate:
