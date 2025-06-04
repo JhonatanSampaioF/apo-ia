@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatórios</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<!-- Header padrão -->
+<div th:replace="fragments/header :: header"></div>
+
+<main>
+    <div class="list-container">
+        <h2>Relatórios Disponíveis</h2>
+        <p>Escolha abaixo o relatório que deseja visualizar ou gerar:</p>
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Relatório</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>📊 Doenças x Abrigados</td>
+                <td>
+                    <a class="add-button" th:href="@{/mvc/relatorio/doenca/visualizar}">Visualizar</a>
+                    <a class="add-button" style="background-color: #6c757d;" th:href="@{/mvc/relatorio/doenca/gerar}">Gerar Novo</a>
+                </td>
+            </tr>
+            <tr>
+                <td>🏠 Idade Média dos Abrigados por Local</td>
+                <td>
+                    <a class="add-button" th:href="@{/mvc/relatorio/abrigado/visualizar}">Visualizar</a>
+                    <a class="add-button" style="background-color: #6c757d;" th:href="@{/mvc/relatorio/abrigado/gerar}">Gerar Novo</a>
+                </td>
+            </tr>
+            <tr>
+                <td>👥 Ocupação de Locais com Voluntários</td>
+                <td>
+                    <a class="add-button" th:href="@{/mvc/relatorio/voluntario/visualizar}">Visualizar</a>
+                    <a class="add-button" style="background-color: #6c757d;" th:href="@{/mvc/relatorio/voluntario/gerar}">Gerar Novo</a>
+                </td>
+            </tr>
+            <tr>
+                <td>📍 Ocupação por Local</td>
+                <td>
+                    <a class="add-button" th:href="@{/mvc/relatorio/local/visualizar}">Visualizar</a>
+                    <a class="add-button" style="background-color: #6c757d;" th:href="@{/mvc/relatorio/local/gerar}">Gerar Novo</a>
+                </td>
+            </tr>
+            <tr>
+                <td>🛠 Voluntários por Habilidade</td>
+                <td>
+                    <a class="add-button" th:href="@{/mvc/relatorio/habilidade/visualizar}">Visualizar</a>
+                    <a class="add-button" style="background-color: #6c757d;" th:href="@{/mvc/relatorio/habilidade/gerar}">Gerar Novo</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

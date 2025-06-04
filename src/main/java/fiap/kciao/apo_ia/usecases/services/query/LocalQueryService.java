@@ -1,7 +1,7 @@
 package fiap.kciao.apo_ia.usecases.services.query;
 
 import fiap.kciao.apo_ia.domains.Local;
-import fiap.kciao.apo_ia.gateways.repositories.LocalRepository;
+import fiap.kciao.apo_ia.gateways.repositories.oracle.LocalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

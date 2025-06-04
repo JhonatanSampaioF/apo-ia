@@ -1,7 +1,7 @@
 package fiap.kciao.apo_ia.usecases.services.query;
 
 import fiap.kciao.apo_ia.domains.Habilidade;
-import fiap.kciao.apo_ia.gateways.repositories.HabilidadeRepository;
+import fiap.kciao.apo_ia.gateways.repositories.oracle.HabilidadeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

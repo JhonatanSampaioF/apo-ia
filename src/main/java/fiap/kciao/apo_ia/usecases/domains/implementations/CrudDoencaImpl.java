@@ -5,7 +5,6 @@ import fiap.kciao.apo_ia.domains.Doenca;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.doencas.DoencaCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.doencas.DoencaUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.doencas.DoencaFullResponseDto;
-import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudAbrigado;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudDoenca;
 import fiap.kciao.apo_ia.usecases.services.query.AbrigadoQueryService;
 import fiap.kciao.apo_ia.usecases.services.query.DoencaQueryService;

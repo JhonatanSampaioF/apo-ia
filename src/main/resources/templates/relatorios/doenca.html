@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Doenças</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+    <div class="list-container">
+        <h2>Relatório: Quantidade de Abrigados por Doença</h2>
+        <p>Dados atualizados com base na geração ou visualização solicitada.</p>
+
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Doença</th>
+                <th>Total de Abrigados</th>
+                <th>Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${relatorio}">
+                <td th:text="${item.nomeDoenca}">Doença</td>
+                <td th:text="${item.totalAbrigados}">0</td>
+                <td th:text="${#temporals.format(item.dataGeracao, 'dd/MM/yyyy HH:mm')}">--</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

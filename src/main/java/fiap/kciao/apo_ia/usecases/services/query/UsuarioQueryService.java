@@ -1,14 +1,13 @@
 package fiap.kciao.apo_ia.usecases.services.query;
 
 import fiap.kciao.apo_ia.domains.Usuario;
-import fiap.kciao.apo_ia.gateways.repositories.UsuarioRepository;
+import fiap.kciao.apo_ia.gateways.repositories.oracle.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

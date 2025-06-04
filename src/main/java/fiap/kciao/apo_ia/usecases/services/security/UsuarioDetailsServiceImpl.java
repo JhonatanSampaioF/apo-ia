@@ -1,7 +1,6 @@
 package fiap.kciao.apo_ia.usecases.services.security;
 
 import fiap.kciao.apo_ia.domains.Usuario;
-import fiap.kciao.apo_ia.gateways.repositories.UsuarioRepository;
 import fiap.kciao.apo_ia.usecases.services.query.UsuarioQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

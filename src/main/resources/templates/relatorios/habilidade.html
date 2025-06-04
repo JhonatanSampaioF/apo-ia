@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Voluntários por Habilidade</title>
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+  <div class="list-container">
+    <h2>Relatório: Voluntários por Habilidade</h2>
+    <p>Dados atualizados com base na geração ou visualização solicitada.</p>
+
+    <table class="styled-table">
+      <thead>
+      <tr>
+        <th>Voluntário</th>
+        <th>Habilidade</th>
+        <th>Grupo</th>
+        <th>Local</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${relatorio}">
+        <td th:text="${item.nomeVoluntario}">Voluntário</td>
+        <td th:text="${item.habilidade}">Habilidade</td>
+        <td th:text="${item.grupoHabilidade}">Grupo</td>
+        <td th:text="${item.nomeLocal}">Local</td>
+        <td th:text="${#temporals.format(item.dataGeracao, 'dd/MM/yyyy HH:mm')}">--</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+</body>
+</html>

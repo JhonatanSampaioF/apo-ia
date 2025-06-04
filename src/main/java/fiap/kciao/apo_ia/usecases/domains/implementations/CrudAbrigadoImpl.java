@@ -8,7 +8,6 @@ import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoCreate
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.abrigados.AbrigadoUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.voluntarios.VoluntarioCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.abrigados.AbrigadoFullResponseDto;
-import fiap.kciao.apo_ia.gateways.dtos.responses.domains.voluntarios.VoluntarioFullResponseDto;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudVoluntario;
 import fiap.kciao.apo_ia.usecases.enums.ManageAction;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudAbrigado;
@@ -19,7 +18,6 @@ import fiap.kciao.apo_ia.usecases.services.query.VoluntarioQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static fiap.kciao.apo_ia.gateways.mappers.domains.AbrigadoMapper.*;

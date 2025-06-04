@@ -1,4 +1,4 @@
-package fiap.kciao.apo_ia.gateways.repositories;
+package fiap.kciao.apo_ia.gateways.repositories.oracle;
 
 import fiap.kciao.apo_ia.domains.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;

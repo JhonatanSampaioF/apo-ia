@@ -14,7 +14,6 @@ import fiap.kciao.apo_ia.usecases.services.query.VoluntarioQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static fiap.kciao.apo_ia.gateways.mappers.domains.VoluntarioMapper.*;
