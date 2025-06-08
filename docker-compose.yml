@@ -1,11 +1,20 @@
 version: "3.8"
 services:
-  mongodb:
-    image: mongo
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: apoia_db
+      MYSQL_USER: apoia_user
+      MYSQL_PASSWORD: apoia_pass
     ports:
-      - "27017:27017"
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+
+volumes:
+  mysql_data:

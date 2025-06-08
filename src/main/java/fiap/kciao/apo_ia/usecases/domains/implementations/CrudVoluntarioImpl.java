@@ -14,7 +14,6 @@ import fiap.kciao.apo_ia.usecases.services.query.VoluntarioQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static fiap.kciao.apo_ia.gateways.mappers.domains.VoluntarioMapper.*;
@@ -33,8 +32,13 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
 
         if (voluntarioCreateRequestDto.getHabilidadeIds() != null && !voluntarioCreateRequestDto.getHabilidadeIds().isEmpty()) {
             List<Habilidade> habilidades = habilidadeQueryService.findAllById(voluntarioCreateRequestDto.getHabilidadeIds());
+
             if (habilidades != null && !habilidades.isEmpty()) {
-                voluntario.getHabilidades().addAll(habilidades);
+                if (voluntario.getHabilidades() != null) {
+                    voluntario.getHabilidades().addAll(habilidades);
+                } else {
+                    voluntario.setHabilidades(habilidades);
+                }
             }
         }
 

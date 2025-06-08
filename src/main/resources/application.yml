@@ -2,34 +2,39 @@ spring:
   application:
     name: Apo.IA
   datasource:
-    url: jdbc:mysql://apoia-server.mysql.database.azure.com:3306/apoia-database?sslMode=REQUIRED
-    username: cfcgslijye@apoia-server
-    password: KiwiRosa@2025
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQLDialect
-    show-sql: true
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.MySQLDialect}
 
   ai:
     ollama:
-      base-url: http://localhost:11434
-      model: llama3
+      base-url: ${SPRING_AI_OLLAMA_BASE_URL:http://localhost:11434}
+      model: ${SPRING_AI_OLLAMA_MODEL:llama3}
+
   thymeleaf:
     cache: false
+
   mvc:
     view:
       prefix: /templates/
       suffix: .html
+
   web:
     resources:
       static-locations: classpath:/static/
+
 server:
+  port: 8080
+  address: 0.0.0.0
   servlet:
     context-path: /
-
 
 jwt:
   secret: ${JWT_SECRET:OhanaQuerDizerFamiliaFamiliaQuerDizerNuncaAbandonarOuEsquecer}
