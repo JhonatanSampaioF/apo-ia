@@ -1,11 +1,13 @@
 package fiap.kciao.apo_ia.usecases.domains.implementations;
 
+import fiap.kciao.apo_ia.domains.Abrigado;
 import fiap.kciao.apo_ia.domains.Local;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.locais.LocalCreateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.requests.domains.locais.LocalUpdateRequestDto;
 import fiap.kciao.apo_ia.gateways.dtos.responses.domains.locais.LocalFullResponseDto;
 import fiap.kciao.apo_ia.gateways.mappers.domains.LocalMapper;
 import fiap.kciao.apo_ia.usecases.domains.interfaces.CrudLocal;
+import fiap.kciao.apo_ia.usecases.services.query.AbrigadoQueryService;
 import fiap.kciao.apo_ia.usecases.services.query.LocalQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import static fiap.kciao.apo_ia.gateways.mappers.domains.LocalMapper.*;
 @RequiredArgsConstructor
 public class CrudLocalImpl implements CrudLocal {
     private final LocalQueryService localQueryService;
+    private final AbrigadoQueryService abrigadoQueryService;
 
     @Override
     public LocalFullResponseDto create(LocalCreateRequestDto localCreateRequestDto) {
@@ -52,6 +55,11 @@ public class CrudLocalImpl implements CrudLocal {
 
     @Override
     public void delete(String id) {
+        List<Abrigado> abrigados = abrigadoQueryService.findAllByLocalId(id);
+        for (Abrigado abrigado : abrigados) {
+            abrigado.setLocalId(null);
+        }
+        abrigadoQueryService.saveAll(abrigados);
         localQueryService.deleteById(id);
     }
 }
