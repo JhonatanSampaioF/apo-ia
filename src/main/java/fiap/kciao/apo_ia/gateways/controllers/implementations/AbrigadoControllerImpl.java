@@ -44,6 +44,7 @@ public class AbrigadoControllerImpl implements AbrigadoController {
     @Operation(summary = "Deleta um abrigado")
     @Override
     public ResponseEntity<AbrigadoFullResponseDto> delete(@PathVariable String id) {
+        crudAbrigado.delete(id);
         return ResponseEntity.noContent().build();
     }
 
