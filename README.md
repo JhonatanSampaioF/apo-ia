@@ -151,8 +151,8 @@ Esses arquivos se encontram em src/main/resources e são utilizados para interna
 
 ## 🔗 Links Úteis
 
-- 🚀 [Deploy da aplicação (placeholder)](https://)
-- 🎥 [Pitch da Solução](https://)
+- 🚀 [Deploy da aplicação](https://apo-ia.azurewebsites.net)
+- 🎥 [Pitch da Solução](https://youtu.be/ly719d8vVvM?si=7uFpbkyNURryVkYD)
 - 🎬 [Demonstração completa](https://youtu.be/iQLERSbk3_A)
 
 ## 👨‍💻 Equipe de Desenvolvimento
