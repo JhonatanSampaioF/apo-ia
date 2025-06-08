@@ -35,7 +35,7 @@ public class CrudVoluntarioImpl implements CrudVoluntario {
             voluntario.setHabilidadeIds(new ArrayList<>());
             List<Habilidade> habilidades = habilidadeQueryService.findAllById(voluntarioCreateRequestDto.getHabilidadeIds());
             if (habilidades != null && !habilidades.isEmpty()) {
-                voluntario.getHabilidadeIds().addAll(habilidades.stream().map(Habilidade::getId).toList());
+                voluntario.setHabilidadeIds(habilidades.stream().map(Habilidade::getId).toList());
             }
         }
 

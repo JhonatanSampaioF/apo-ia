@@ -42,7 +42,7 @@ public class CrudAbrigadoImpl implements CrudAbrigado {
             abrigado.setDoencaIds(new ArrayList<>());
             List<Doenca> doencas = doencaQueryService.findAllById(abrigadoCreateRequestDto.getDoencaIds());
             if (doencas != null && !doencas.isEmpty()) {
-                abrigado.getDoencaIds().addAll(doencas.stream().map(Doenca::getId).toList());
+                abrigado.setDoencaIds(doencas.stream().map(Doenca::getId).toList());
             }
         }
 
