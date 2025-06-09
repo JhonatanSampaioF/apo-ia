@@ -27,7 +27,7 @@ O **Apo.IA** é um sistema web completo voltado para gestão de pessoas em situa
 | Filas         | RabbitMQ                                                                   |
 | Testes        | JUnit 5, Mockito, Awaitility, TestContainers (opcional)                    |
 | Build Tool    | Maven                                                                      |
-| Outras        | Jakarta Validation, Lombok, Swagger, Thymeleaf (MVC)                                      |
+| Outras        | Jakarta Validation, Lombok, Thymeleaf (MVC)                                      |
 
 ---
 
