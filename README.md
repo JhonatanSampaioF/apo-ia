@@ -36,7 +36,7 @@ O **Apo.IA** é um sistema web completo voltado para gestão de pessoas em situa
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/apo-ia.git
+git clone https://github.com/JhonatanSampaioF/apo-ia.git
 cd apo-ia
 ```
 
